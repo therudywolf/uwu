@@ -21,8 +21,8 @@
 
    ```bash
    git clone https://github.com/therudywolf/uwu.git
-   cd uwu-furry-translator```
+   cd uwu-furry-translator
 
 3. Запустить:
 
-```python uwu_translator.py```
+```python uwu_translator.py
