@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#1a1a2e">
+    <meta name="description" content="Nocturne UWU Translator - Cyber Wolf Protocol">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <link rel="manifest" href="data:application/json;base64,eyJuYW1lIjoiTm9jdHVybmUgVVdVIFRyYW5zbGF0b3IiLCJzaG9ydF9uYW1lIjoiTm9jdHVybmUiLCJzdGFydF91cmwiOiIuIiwiZGlzcGxheSI6InN0YW5kYWxvbmUiLCJiYWNrZ3JvdW5kX2NvbG9yIjoiIzFhMWEyZSIsInRoZW1lX2NvbG9yIjoiIzFhMWEyZSIsImljb25zIjpbeyJzcmMiOiJkYXRhOmltYWdlL3N2Zyt4bWw7YmFzZTY0LFBITjJaeUI0Yld4dWN6MGlhSFIwY0RvdkwzZDNkeTUzTXk1dmNtY3ZNakF3TUM5emRtY2lJSFpwWlhkQ2IzZzlJakFnTUNBeE1qZ2dNVEk0SWo0OGNtVmpkQ0IzYVdSMGFEMGlNVEk0SWlCb1pXbG5hSFE5SWpFeU9DSWdabWxzYkQwaUl6RmhNV0V5WlNJdlBqeDBaWGgwSUhnOUlqWTBJaUI1UFNJM01DSWdabWxzYkQwaUl6QXdabVkwTVNJZ1ptOXVkQzF6YVhwbFBTSTBPQ0lnWm05dWRDMW1ZVzFwYkhrOUlrTnZkWEpwWlhJaVBqRndQQzkwWlhoMFBqd3ZjM1puUGc9PSIsInNpemVzIjoiNTEyeDUxMiIsInR5cGUiOiJpbWFnZS9zdmcreG1sIn1dfQ==">
+    <title>🐺 Nocturne UWU Translator</title>
+    
+    <style>
+        /* ═══════════════════════════════════════════════════════════════ */
+        /* CYBER WOLF DESIGN SYSTEM - NOCTURNE PROTOCOL                    */
+        /* ═══════════════════════════════════════════════════════════════ */
+        
+        :root {
+            --bg-primary: #0f0f1e;
+            --bg-secondary: #1a1a2e;
+            --bg-input: #16213e;
+            --text-primary: #00ff41;
+            --text-secondary: #0f3460;
+            --text-muted: #636e72;
+            --accent-glow: #00ff41;
+            --accent-danger: #ff4757;
+            --border-color: #0f3460;
+            --shadow-glow: 0 0 20px rgba(0, 255, 65, 0.3);
+            --shadow-dark: 0 4px 15px rgba(0, 0, 0, 0.5);
+            
+            --font-mono: 'Courier New', 'Consolas', monospace;
+            --transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: var(--font-mono);
+            background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+            color: var(--text-primary);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+            position: relative;
+            -webkit-font-smoothing: antialiased;
+        }
+        
+        /* Animated background particles */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(0, 255, 65, 0.05) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(15, 52, 96, 0.1) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 0;
+            animation: pulse 8s ease-in-out infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 0.8; }
+        }
+        
+        .container {
+            position: relative;
+            z-index: 1;
+            width: 100%;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        /* Header */
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            animation: slideDown 0.6s ease-out;
+        }
+        
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .header h1 {
+            font-size: clamp(1.2rem, 4vw, 1.8rem);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+            text-shadow: 0 0 15px var(--accent-glow);
+            animation: glowPulse 2s ease-in-out infinite;
+        }
+        
+        @keyframes glowPulse {
+            0%, 100% { text-shadow: 0 0 10px var(--accent-glow); }
+            50% { text-shadow: 0 0 25px var(--accent-glow), 0 0 40px var(--accent-glow); }
+        }
+        
+        .header p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            font-style: italic;
+        }
+        
+        /* Text areas */
+        .text-section {
+            margin-bottom: 25px;
+            animation: fadeIn 0.8s ease-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .text-section label {
+            display: block;
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: bold;
+        }
+        
+        textarea {
+            width: 100%;
+            min-height: 150px;
+            padding: 15px;
+            background: var(--bg-input);
+            border: 2px solid var(--border-color);
+            border-radius: 8px;
+            color: var(--text-primary);
+            font-family: var(--font-mono);
+            font-size: 0.95rem;
+            resize: vertical;
+            transition: var(--transition);
+            box-shadow: var(--shadow-dark);
+        }
+        
+        textarea:focus {
+            outline: none;
+            border-color: var(--accent-glow);
+            box-shadow: var(--shadow-glow);
+            background: #1a2332;
+        }
+        
+        textarea::placeholder {
+            color: var(--text-muted);
+            opacity: 0.6;
+        }
+        
+        #output {
+            background: #0d1117;
+            cursor: text;
+            user-select: text;
+        }
+        
+        /* Buttons */
+        .button-group {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-bottom: 25px;
+            justify-content: center;
+        }
+        
+        button {
+            flex: 1;
+            min-width: 140px;
+            padding: 14px 20px;
+            border: 2px solid var(--border-color);
+            border-radius: 8px;
+            font-family: var(--font-mono);
+            font-size: 0.9rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+            letter-spacing: 1px;
+        }
+        
+        button::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+        
+        button:active::before {
+            width: 300px;
+            height: 300px;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #0f3460 0%, #16213e 100%);
+            color: var(--accent-glow);
+            border-color: var(--accent-glow);
+        }
+        
+        .btn-primary:hover {
+            background: var(--accent-glow);
+            color: var(--bg-primary);
+            box-shadow: var(--shadow-glow);
+            transform: translateY(-2px);
+        }
+        
+        .btn-secondary {
+            background: var(--bg-input);
+            color: var(--text-primary);
+        }
+        
+        .btn-secondary:hover {
+            background: #1a2332;
+            border-color: var(--text-primary);
+            transform: translateY(-2px);
+        }
+        
+        .btn-danger {
+            background: var(--bg-input);
+            color: var(--accent-danger);
+            border-color: var(--accent-danger);
+        }
+        
+        .btn-danger:hover {
+            background: var(--accent-danger);
+            color: white;
+            transform: translateY(-2px);
+        }
+        
+        button:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+            transform: none !important;
+        }
+        
+        /* Stats */
+        .stats {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+            padding: 15px;
+            background: rgba(22, 33, 62, 0.5);
+            border-radius: 8px;
+            margin-bottom: 20px;
+            border: 1px solid var(--border-color);
+        }
+        
+        .stat-item {
+            text-align: center;
+        }
+        
+        .stat-value {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--accent-glow);
+        }
+        
+        .stat-label {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+        }
+        
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 20px;
+            color: var(--text-muted);
+            font-size: 0.8rem;
+            border-top: 1px solid var(--border-color);
+            margin-top: auto;
+        }
+        
+        .wolf-emoji {
+            display: inline-block;
+            animation: howl 3s ease-in-out infinite;
+        }
+        
+        @keyframes howl {
+            0%, 100% { transform: rotate(0deg); }
+            25% { transform: rotate(-5deg); }
+            75% { transform: rotate(5deg); }
+        }
+        
+        /* Toast notification */
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: var(--bg-input);
+            color: var(--accent-glow);
+            padding: 15px 30px;
+            border-radius: 8px;
+            border: 2px solid var(--accent-glow);
+            box-shadow: var(--shadow-glow);
+            font-weight: bold;
+            z-index: 1000;
+            opacity: 0;
+            transition: var(--transition);
+        }
+        
+        .toast.show {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+        
+        /* Mobile optimizations */
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+            
+            .header h1 {
+                font-size: 1.3rem;
+            }
+            
+            textarea {
+                min-height: 120px;
+                font-size: 0.9rem;
+            }
+            
+            .button-group {
+                flex-direction: column;
+            }
+            
+            button {
+                width: 100%;
+                min-width: auto;
+            }
+            
+            .stats {
+                gap: 15px;
+            }
+        }
+        
+        /* Loading animation */
+        .loading {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            border: 2px solid var(--accent-glow);
+            border-radius: 50%;
+            border-top-color: transparent;
+            animation: spin 0.8s linear infinite;
+            margin-left: 8px;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        /* Selection styling */
+        ::selection {
+            background: var(--accent-glow);
+            color: var(--bg-primary);
+        }
+        
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: var(--bg-input);
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: var(--border-color);
+            border-radius: 5px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--accent-glow);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>━━━ <span class="wolf-emoji">🐺</span> NOCTURNE PROTOCOL ━━━</h1>
+            <p>*принюхивается к коду* | Cyber Wolf UWU Translator | *неоновый отблеск*</p>
+        </header>
+        
+        <div class="text-section">
+            <label for="input">▼ INPUT [normal text] *уши настороже*</label>
+            <textarea 
+                id="input" 
+                placeholder="Введи текст здесь... *хвост вильнул*"
+                spellcheck="false"
+            ></textarea>
+        </div>
+        
+        <div class="button-group">
+            <button class="btn-primary" id="transformBtn">
+                ⚡ TRANSFORM
+            </button>
+            <button class="btn-secondary" id="copyBtn">
+                📋 COPY
+            </button>
+            <button class="btn-danger" id="clearBtn">
+                🗑 CLEAR
+            </button>
+        </div>
+        
+        <div class="stats">
+            <div class="stat-item">
+                <div class="stat-value" id="charCount">0</div>
+                <div class="stat-label">Символов</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value" id="wordCount">0</div>
+                <div class="stat-label">Слов</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value" id="uwuCount">0</div>
+                <div class="stat-label">UWU Score</div>
+            </div>
+        </div>
+        
+        <div class="text-section">
+            <label for="output">▼ OUTPUT [uwu translated] *зарычал одобрительно*</label>
+            <textarea 
+                id="output" 
+                placeholder="Результат появится здесь... *вгляделся в терминал*"
+                readonly
+                spellcheck="false"
+            ></textarea>
+        </div>
+        
+        <footer class="footer">
+            <p>*клацает когтями* | Nocturne Protocol v2.5 | *следы в логах* | PWA Ready</p>
+            <p style="margin-top: 8px; font-size: 0.7rem;">Работает офлайн | Адаптивная верстка | Cross-platform</p>
+        </footer>
+    </div>
+    
+    <div class="toast" id="toast"></div>
+    
+    <script>
+        // ═══════════════════════════════════════════════════════════════
+        // NOCTURNE CORE ENGINE - UWU TRANSLATION PROTOCOL
+        // ═══════════════════════════════════════════════════════════════
+        
+        const WOLF_NOISES = [
+            " *тихо порыкивает*", " *уши настороже*", " *принюхивается*", 
+            " *хвост вильнул*", " *клыки блеснули*", " *взгляд в сумраке*", 
+            " *шерсть встала дыбом*", " *низкий вой*", " *прижал уши*", 
+            " *лапа легла на клавиатуру*", " *клацает когтями*", 
+            " *зарычал одобрительно*", " *вгляделся в терминал*", 
+            " *обнюхал пакеты*", " *следы в логах*", " *скалится в темноте*",
+            " *лунный свет в глазах*", " *неоновый отблеск на шерсти*"
+        ];
+        
+        const CYBER_VIBES = [" ▓▒░", " [0x", " //", " >>", " >>>", " ┃", " ━━", " ◆", " ●", " ▲"];
+        
+        const UWU_DICT = {
+            // Cyber/Tech
+            'код': 'кодик~', 'баг': 'багуля~', 'система': 'сьистемка~', 
+            'сервер': 'сельвельчик~', 'хакер': 'хакелуня~', 'данные': 'данюльки~',
+            'сеть': 'сетюнька~', 'пароль': 'пальольчик~', 'шифр': 'шифльулька~',
+            
+            // Волчья тема
+            'волк': 'уольчек', 'волки': 'уольчата', 'клык': 'клычок', 
+            'клыки': 'клычки', 'лапа': 'лапуля', 'лапы': 'лапульки', 
+            'хвост': 'хвостуля', 'шерсть': 'шельстюля', 'вой': 'воюля', 
+            'рык': 'рычулька', 'охота': 'охотуля', 'добыча': 'добычуля',
+            'стая': 'стайка', 'луна': 'лунечка', 'ночь': 'ночуля', 
+            'тьма': 'тьмулька', 'зверь': 'звельюшка',
+            
+            // Базовые слова
+            'привет': 'пльивветик~', 'пока': 'покасики~', 
+            'спасибо': 'спасибуля~', 'да': 'дася~', 'нет': 'нетя~', 
+            'хорошо': 'хольошенько~', 'плохо': 'плёхенько~',
+            'друг': 'дльужок~', 'враг': 'вльажулька~', 
+            'страх': 'стльахуля~', 'сила': 'сильуля~', 
+            'опасность': 'опаснюська~', 'помощь': 'помощечка~',
+            'любовь': 'любуовка~', 'ненависть': 'нельнависюлька~',
+            
+            // English
+            'wolf': 'wuffie', 'pack': 'packie', 'hunt': 'huntie', 
+            'fang': 'fangie', 'claw': 'clawie', 'howl': 'howwie',
+            'code': 'codie', 'hack': 'hackie', 'cyber': 'cybie',
+            'system': 'systie', 'network': 'netwolkie', 'data': 'datie',
+            'hello': 'hewwo', 'thanks': 'thankies', 'yes': 'yesh', 
+            'no': 'nuu', 'friend': 'fwend', 'enemy': 'enemie',
+            'dark': 'darkie', 'night': 'nitey', 'love': 'wuv'
+        };
+        
+        function uwuTranslate(text) {
+            if (!text.trim()) return '';
+            
+            let result = text;
+            const original = text.toLowerCase();
+            
+            // 1. Словарные замены
+            Object.entries(UWU_DICT).forEach(([word, cute]) => {
+                const regex = new RegExp(`\\b${word}\\b`, 'gi');
+                result = result.replace(regex, cute);
+            });
+            
+            // 2. Фонетика (русский)
+            result = result.replace(/р/g, 'ль').replace(/Р/g, 'Ль');
+            result = result.replace(/л(?![ьюя])/g, 'лью').replace(/Л(?![ьюя])/g, 'Лью');
+            result = result.replace(/([внсз])([аеёиоуыэюя])/g, '$1ь$2');
+            
+            // 3. Фонетика (english)
+            result = result.replace(/\b([rl])\b/g, 'w');
+            result = result.replace(/\b([RL])\b/g, 'W');
+            result = result.replace(/n([aeiou])/g, 'ny$1');
+            result = result.replace(/N([aeiou])/g, 'Ny$1');
+            
+            // 4. Добавление шумов
+            const sentences = result.split(/([.!?…])/);
+            const enhanced = [];
+            
+            sentences.forEach((segment, i) => {
+                enhanced.push(segment);
+                if (segment.match(/[.!?…]/) && Math.random() > 0.4) {
+                    enhanced.push(WOLF_NOISES[Math.floor(Math.random() * WOLF_NOISES.length)]);
+                    if (Math.random() > 0.7) {
+                        enhanced.push(CYBER_VIBES[Math.floor(Math.random() * CYBER_VIBES.length)]);
+                    }
+                }
+            });
+            
+            return enhanced.join('');
+        }
+        
+        // ═══════════════════════════════════════════════════════════════
+        // UI LOGIC & EVENT HANDLERS
+        // ═══════════════════════════════════════════════════════════════
+        
+        const elements = {
+            input: document.getElementById('input'),
+            output: document.getElementById('output'),
+            transformBtn: document.getElementById('transformBtn'),
+            copyBtn: document.getElementById('copyBtn'),
+            clearBtn: document.getElementById('clearBtn'),
+            charCount: document.getElementById('charCount'),
+            wordCount: document.getElementById('wordCount'),
+            uwuCount: document.getElementById('uwuCount'),
+            toast: document.getElementById('toast')
+        };
+        
+        let autoConvertTimeout;
+        
+        // Auto-convert with debounce
+        elements.input.addEventListener('input', () => {
+            clearTimeout(autoConvertTimeout);
+            autoConvertTimeout = setTimeout(() => {
+                transform();
+            }, 500);
+            updateStats();
+        });
+        
+        // Transform button
+        elements.transformBtn.addEventListener('click', transform);
+        
+        // Copy button
+        elements.copyBtn.addEventListener('click', async () => {
+            const text = elements.output.value;
+            if (!text.trim()) {
+                showToast('*скулит* Нечего копировать...', 'error');
+                return;
+            }
+            
+            try {
+                await navigator.clipboard.writeText(text);
+                showToast('✓ COPIED! *одобрительно рычит*', 'success');
+            } catch (err) {
+                // Fallback для старых браузеров
+                elements.output.select();
+                document.execCommand('copy');
+                showToast('✓ COPIED! *одобрительно рычит*', 'success');
+            }
+        });
+        
+        // Clear button
+        elements.clearBtn.addEventListener('click', () => {
+            elements.input.value = '';
+            elements.output.value = '';
+            updateStats();
+            showToast('*стряхнул шерсть* Очищено!', 'info');
+        });
+        
+        // Keyboard shortcuts
+        document.addEventListener('keydown', (e) => {
+            if (e.ctrlKey || e.metaKey) {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    transform();
+                } else if (e.key === 'l') {
+                    e.preventDefault();
+                    elements.clearBtn.click();
+                }
+            }
+        });
+        
+        function transform() {
+            const input = elements.input.value;
+            if (!input.trim()) {
+                elements.output.value = '*принюхивается* Пусто... *уши прижал*';
+                updateStats();
+                return;
+            }
+            
+            elements.transformBtn.innerHTML = '⚡ TRANSFORMING<span class="loading"></span>';
+            elements.transformBtn.disabled = true;
+            
+            // Simulate async processing for UX
+            setTimeout(() => {
+                const result = uwuTranslate(input);
+                elements.output.value = result;
+                updateStats();
+                
+                elements.transformBtn.innerHTML = '⚡ TRANSFORM';
+                elements.transformBtn.disabled = false;
+                
+                showToast('*хвост вильнул* Готово!', 'success');
+            }, 300);
+        }
+        
+        function updateStats() {
+            const input = elements.input.value;
+            const output = elements.output.value;
+            
+            elements.charCount.textContent = input.length;
+            elements.wordCount.textContent = input.trim() ? input.trim().split(/\s+/).length : 0;
+            
+            // UWU Score: количество UWU-специфичных элементов
+            const uwuScore = (output.match(/[~*]/g) || []).length + 
+                           (output.match(/ль|уо|ю|ня/gi) || []).length;
+            elements.uwuCount.textContent = Math.min(999, uwuScore);
+        }
+        
+        function showToast(message, type = 'info') {
+            elements.toast.textContent = message;
+            elements.toast.className = 'toast show';
+            
+            setTimeout(() => {
+                elements.toast.classList.remove('show');
+            }, 2500);
+        }
+        
+        // ═══════════════════════════════════════════════════════════════
+        // PWA SERVICE WORKER REGISTRATION
+        // ═══════════════════════════════════════════════════════════════
+        
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                // Inline service worker для полной автономности
+                const swCode = `
+                    self.addEventListener('install', (e) => {
+                        self.skipWaiting();
+                    });
+                    
+                    self.addEventListener('activate', (e) => {
+                        e.waitUntil(clients.claim());
+                    });
+                    
+                    self.addEventListener('fetch', (e) => {
+                        e.respondWith(
+                            caches.match(e.request).then(response => {
+                                return response || fetch(e.request);
+                            })
+                        );
+                    });
+                `;
+                
+                const blob = new Blob([swCode], { type: 'application/javascript' });
+                const swUrl = URL.createObjectURL(blob);
+                
+                navigator.serviceWorker.register(swUrl)
+                    .then(() => console.log('*обнюхал* Service Worker активен'))
+                    .catch(err => console.error('SW registration failed:', err));
+            });
+        }
+        
+        // Initial stats update
+        updateStats();
+        
+        // Install prompt для PWA
+        let deferredPrompt;
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+            showToast('*виляет хвостом* Можно установить как приложение!', 'info');
+        });
+    </script>
+</body>
+</html>
