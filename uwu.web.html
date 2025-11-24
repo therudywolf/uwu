@@ -1,207 +1,256 @@
 <!DOCTYPE html>
 <html lang="ru">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="theme-color" content="#1a1a2e">
-    <meta name="description" content="Nocturne UWU Translator - Cyber Wolf Protocol">
+    <meta name="description" content="Wolf Pack UWU Translator - 5 Unique Personalities">
     <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <link rel="manifest" href="data:application/json;base64,eyJuYW1lIjoiTm9jdHVybmUgVVdVIFRyYW5zbGF0b3IiLCJzaG9ydF9uYW1lIjoiTm9jdHVybmUiLCJzdGFydF91cmwiOiIuIiwiZGlzcGxheSI6InN0YW5kYWxvbmUiLCJiYWNrZ3JvdW5kX2NvbG9yIjoiIzFhMWEyZSIsInRoZW1lX2NvbG9yIjoiIzFhMWEyZSIsImljb25zIjpbeyJzcmMiOiJkYXRhOmltYWdlL3N2Zyt4bWw7YmFzZTY0LFBITjJaeUI0Yld4dWN6MGlhSFIwY0RvdkwzZDNkeTUzTXk1dmNtY3ZNakF3TUM5emRtY2lJSFpwWlhkQ2IzZzlJakFnTUNBeE1qZ2dNVEk0SWo0OGNtVmpkQ0IzYVdSMGFEMGlNVEk0SWlCb1pXbG5hSFE5SWpFeU9DSWdabWxzYkQwaUl6RmhNV0V5WlNJdlBqeDBaWGgwSUhnOUlqWTBJaUI1UFNJM01DSWdabWxzYkQwaUl6QXdabVkwTVNJZ1ptOXVkQzF6YVhwbFBTSTBPQ0lnWm05dWRDMW1ZVzFwYkhrOUlrTnZkWEpwWlhJaVBqRndQQzkwWlhoMFBqd3ZjM1puUGc9PSIsInNpemVzIjoiNTEyeDUxMiIsInR5cGUiOiJpbWFnZS9zdmcreG1sIn1dfQ==">
-    <title>🐺 Nocturne UWU Translator</title>
-    
+    <title>🐺 Wolf Pack UWU Translator</title>
+
     <style>
         /* ═══════════════════════════════════════════════════════════════ */
-        /* CYBER WOLF DESIGN SYSTEM - NOCTURNE PROTOCOL                    */
+        /* WOLF PACK CORE DESIGN SYSTEM                                    */
         /* ═══════════════════════════════════════════════════════════════ */
-        
-        :root {
-            --bg-primary: #0f0f1e;
-            --bg-secondary: #1a1a2e;
-            --bg-input: #16213e;
-            --text-primary: #00ff41;
-            --text-secondary: #0f3460;
-            --text-muted: #636e72;
-            --accent-glow: #00ff41;
-            --accent-danger: #ff4757;
-            --border-color: #0f3460;
-            --shadow-glow: 0 0 20px rgba(0, 255, 65, 0.3);
-            --shadow-dark: 0 4px 15px rgba(0, 0, 0, 0.5);
-            
-            --font-mono: 'Courier New', 'Consolas', monospace;
-            --transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-        
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-        
+
         body {
-            font-family: var(--font-mono);
-            background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
-            color: var(--text-primary);
+            font-family: 'Courier New', 'Consolas', monospace;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
             overflow-x: hidden;
+            transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
             position: relative;
-            -webkit-font-smoothing: antialiased;
         }
-        
-        /* Animated background particles */
-        body::before {
+
+        /* ═══════════════════════════════════════════════════════════════ */
+        /* NOCTURNE - Cyber Wolf (Default)                                 */
+        /* ═══════════════════════════════════════════════════════════════ */
+        body.nocturne {
+            background: linear-gradient(135deg, #0f0f1e 0%, #1a1a2e 100%);
+            color: #00ff41;
+        }
+
+        body.nocturne::before {
             content: '';
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: 
-                radial-gradient(circle at 20% 50%, rgba(0, 255, 65, 0.05) 0%, transparent 50%),
-                radial-gradient(circle at 80% 80%, rgba(15, 52, 96, 0.1) 0%, transparent 50%);
+            inset: 0;
+            background:
+                radial-gradient(circle at 20% 50%, rgba(0, 255, 65, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(15, 52, 96, 0.12) 0%, transparent 50%);
             pointer-events: none;
-            z-index: 0;
             animation: pulse 8s ease-in-out infinite;
         }
-        
-        @keyframes pulse {
-            0%, 100% { opacity: 0.5; }
-            50% { opacity: 0.8; }
+
+        /* ═══════════════════════════════════════════════════════════════ */
+        /* RUDI - Gopnik Wolf BMW Aesthetic                                */
+        /* ═══════════════════════════════════════════════════════════════ */
+        body.rudi {
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+            color: #ffffff;
+            font-family: 'Arial', sans-serif;
         }
-        
-        .container {
-            position: relative;
-            z-index: 1;
-            width: 100%;
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 20px;
-            flex: 1;
+
+        body.rudi::before {
+            content: '▓▓▓';
+            position: fixed;
+            inset: 0;
+            background:
+                repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(0, 112, 192, 0.03) 10px, rgba(0, 112, 192, 0.03) 20px),
+                radial-gradient(circle at 70% 30%, rgba(0, 112, 192, 0.15) 0%, transparent 50%);
+            pointer-events: none;
+            font-size: 200px;
+            color: rgba(0, 112, 192, 0.02);
             display: flex;
-            flex-direction: column;
-        }
-        
-        /* Header */
-        .header {
-            text-align: center;
-            margin-bottom: 30px;
-            animation: slideDown 0.6s ease-out;
-        }
-        
-        @keyframes slideDown {
-            from {
-                opacity: 0;
-                transform: translateY(-30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        
-        .header h1 {
-            font-size: clamp(1.2rem, 4vw, 1.8rem);
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            margin-bottom: 10px;
-            text-shadow: 0 0 15px var(--accent-glow);
-            animation: glowPulse 2s ease-in-out infinite;
-        }
-        
-        @keyframes glowPulse {
-            0%, 100% { text-shadow: 0 0 10px var(--accent-glow); }
-            50% { text-shadow: 0 0 25px var(--accent-glow), 0 0 40px var(--accent-glow); }
-        }
-        
-        .header p {
-            color: var(--text-muted);
-            font-size: 0.9rem;
-            font-style: italic;
-        }
-        
-        /* Text areas */
-        .text-section {
-            margin-bottom: 25px;
-            animation: fadeIn 0.8s ease-out;
-        }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-        
-        .text-section label {
-            display: block;
-            color: var(--text-secondary);
-            font-size: 0.85rem;
-            margin-bottom: 8px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            font-weight: bold;
-        }
-        
-        textarea {
-            width: 100%;
-            min-height: 150px;
-            padding: 15px;
-            background: var(--bg-input);
-            border: 2px solid var(--border-color);
-            border-radius: 8px;
-            color: var(--text-primary);
-            font-family: var(--font-mono);
-            font-size: 0.95rem;
-            resize: vertical;
-            transition: var(--transition);
-            box-shadow: var(--shadow-dark);
-        }
-        
-        textarea:focus {
-            outline: none;
-            border-color: var(--accent-glow);
-            box-shadow: var(--shadow-glow);
-            background: #1a2332;
-        }
-        
-        textarea::placeholder {
-            color: var(--text-muted);
-            opacity: 0.6;
-        }
-        
-        #output {
-            background: #0d1117;
-            cursor: text;
-            user-select: text;
-        }
-        
-        /* Buttons */
-        .button-group {
-            display: flex;
-            gap: 15px;
-            flex-wrap: wrap;
-            margin-bottom: 25px;
+            align-items: center;
             justify-content: center;
         }
-        
-        button {
-            flex: 1;
-            min-width: 140px;
-            padding: 14px 20px;
-            border: 2px solid var(--border-color);
+
+        /* ═══════════════════════════════════════════════════════════════ */
+        /* NICK - Musician Wolf Dreamy Aesthetic                           */
+        /* ═══════════════════════════════════════════════════════════════ */
+        body.nick {
+            background: linear-gradient(135deg, #2d1b3d 0%, #1a1226 100%);
+            color: #d4a5ff;
+        }
+
+        body.nick::before {
+            content: '♪ ♫ ♪';
+            position: fixed;
+            inset: 0;
+            background:
+                radial-gradient(circle at 30% 40%, rgba(147, 51, 234, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 70% 60%, rgba(212, 165, 255, 0.08) 0%, transparent 50%);
+            pointer-events: none;
+            font-size: 120px;
+            color: rgba(147, 51, 234, 0.05);
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        /* ═══════════════════════════════════════════════════════════════ */
+        /* DEATH - Пёс в сапогах (красный, огненный)                       */
+        /* ═══════════════════════════════════════════════════════════════ */
+        body.death {
+            background: linear-gradient(135deg, #1a0000 0%, #330000 100%);
+            color: #ff4444;
+        }
+
+        body.death::before {
+            content: '☠';
+            position: fixed;
+            inset: 0;
+            background:
+                radial-gradient(circle at 50% 50%, rgba(255, 68, 68, 0.12) 0%, transparent 60%),
+                repeating-radial-gradient(circle at 50% 50%, transparent 0, transparent 40px, rgba(255, 0, 0, 0.03) 40px, rgba(255, 0, 0, 0.03) 80px);
+            pointer-events: none;
+            font-size: 250px;
+            color: rgba(255, 0, 0, 0.04);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: deathPulse 3s ease-in-out infinite;
+        }
+
+        /* ═══════════════════════════════════════════════════════════════ */
+        /* FELIX - Soft Gay Wolf Pastel Aesthetic                          */
+        /* ═══════════════════════════════════════════════════════════════ */
+        body.felix {
+            background: linear-gradient(135deg, #ffe5f5 0%, #ffd4e9 100%);
+            color: #ff69b4;
+        }
+
+        body.felix::before {
+            content: '💕 ✨ 🌸';
+            position: fixed;
+            inset: 0;
+            background:
+                radial-gradient(circle at 20% 80%, rgba(255, 182, 193, 0.2) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(255, 105, 180, 0.15) 0%, transparent 50%);
+            pointer-events: none;
+            font-size: 100px;
+            color: rgba(255, 105, 180, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            animation: sparkle 4s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                opacity: 0.5;
+            }
+
+            50% {
+                opacity: 0.8;
+            }
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+
+        @keyframes deathPulse {
+
+            0%,
+            100% {
+                transform: scale(1);
+                opacity: 0.3;
+            }
+
+            50% {
+                transform: scale(1.1);
+                opacity: 0.5;
+            }
+        }
+
+        @keyframes sparkle {
+
+            0%,
+            100% {
+                transform: rotate(0deg);
+            }
+
+            50% {
+                transform: rotate(5deg);
+            }
+        }
+
+        /* ═══════════════════════════════════════════════════════════════ */
+        /* PERSONALITY SELECTOR                                            */
+        /* ═══════════════════════════════════════════════════════════════ */
+        .personality-bar {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            padding: 15px;
+            backdrop-filter: blur(10px);
+            border-bottom: 2px solid;
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+        }
+
+        body.nocturne .personality-bar {
+            background: rgba(26, 26, 46, 0.95);
+            border-color: #0f3460;
+        }
+
+        body.rudi .personality-bar {
+            background: rgba(45, 45, 45, 0.95);
+            border-color: #0070c0;
+        }
+
+        body.nick .personality-bar {
+            background: rgba(42, 27, 61, 0.95);
+            border-color: #9333ea;
+        }
+
+        body.death .personality-bar {
+            background: rgba(51, 0, 0, 0.95);
+            border-color: #ff4444;
+        }
+
+        body.felix .personality-bar {
+            background: rgba(255, 212, 233, 0.95);
+            border-color: #ff69b4;
+        }
+
+        .personality-btn {
+            padding: 10px 20px;
+            border: 2px solid;
             border-radius: 8px;
-            font-family: var(--font-mono);
-            font-size: 0.9rem;
-            font-weight: bold;
-            text-transform: uppercase;
             cursor: pointer;
-            transition: var(--transition);
+            font-weight: bold;
+            font-size: 0.9rem;
+            transition: all 0.3s;
+            text-transform: uppercase;
             position: relative;
             overflow: hidden;
-            letter-spacing: 1px;
         }
-        
-        button::before {
+
+        .personality-btn::before {
             content: '';
             position: absolute;
             top: 50%;
@@ -209,511 +258,1266 @@
             width: 0;
             height: 0;
             border-radius: 50%;
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.2);
             transform: translate(-50%, -50%);
             transition: width 0.6s, height 0.6s;
         }
-        
-        button:active::before {
+
+        .personality-btn:active::before {
             width: 300px;
             height: 300px;
         }
-        
-        .btn-primary {
-            background: linear-gradient(135deg, #0f3460 0%, #16213e 100%);
-            color: var(--accent-glow);
-            border-color: var(--accent-glow);
+
+        .personality-btn.active {
+            transform: scale(1.1);
+            box-shadow: 0 0 20px currentColor;
         }
-        
-        .btn-primary:hover {
-            background: var(--accent-glow);
-            color: var(--bg-primary);
-            box-shadow: var(--shadow-glow);
-            transform: translateY(-2px);
+
+        /* Nocturne button */
+        .btn-nocturne {
+            background: #16213e;
+            color: #00ff41;
+            border-color: #00ff41;
         }
-        
-        .btn-secondary {
-            background: var(--bg-input);
-            color: var(--text-primary);
+
+        .btn-nocturne:hover {
+            background: #00ff41;
+            color: #16213e;
         }
-        
-        .btn-secondary:hover {
-            background: #1a2332;
-            border-color: var(--text-primary);
-            transform: translateY(-2px);
+
+        /* Rudi button */
+        .btn-rudi {
+            background: #2d2d2d;
+            color: #0070c0;
+            border-color: #0070c0;
         }
-        
-        .btn-danger {
-            background: var(--bg-input);
-            color: var(--accent-danger);
-            border-color: var(--accent-danger);
-        }
-        
-        .btn-danger:hover {
-            background: var(--accent-danger);
+
+        .btn-rudi:hover {
+            background: #0070c0;
             color: white;
-            transform: translateY(-2px);
         }
-        
-        button:disabled {
-            opacity: 0.4;
-            cursor: not-allowed;
-            transform: none !important;
+
+        /* Nick button */
+        .btn-nick {
+            background: #2d1b3d;
+            color: #d4a5ff;
+            border-color: #9333ea;
         }
-        
-        /* Stats */
-        .stats {
-            display: flex;
-            gap: 20px;
-            justify-content: center;
-            flex-wrap: wrap;
-            padding: 15px;
-            background: rgba(22, 33, 62, 0.5);
-            border-radius: 8px;
-            margin-bottom: 20px;
-            border: 1px solid var(--border-color);
+
+        .btn-nick:hover {
+            background: #9333ea;
+            color: white;
         }
-        
-        .stat-item {
+
+        /* Death button */
+        .btn-death {
+            background: #1a0000;
+            color: #ff4444;
+            border-color: #ff4444;
+        }
+
+        .btn-death:hover {
+            background: #ff4444;
+            color: white;
+        }
+
+        /* Felix button */
+        .btn-felix {
+            background: #ffd4e9;
+            color: #ff69b4;
+            border-color: #ff69b4;
+        }
+
+        .btn-felix:hover {
+            background: #ff69b4;
+            color: white;
+        }
+
+        /* ═══════════════════════════════════════════════════════════════ */
+        /* MAIN CONTAINER                                                  */
+        /* ═══════════════════════════════════════════════════════════════ */
+        .container {
+            position: relative;
+            z-index: 1;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+            flex: 1;
+        }
+
+        .header {
             text-align: center;
+            margin-bottom: 30px;
+            animation: slideDown 0.6s ease-out;
         }
-        
-        .stat-value {
-            font-size: 1.5rem;
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .header h1 {
+            font-size: clamp(1.3rem, 4vw, 2rem);
+            margin-bottom: 10px;
+            letter-spacing: 2px;
+            text-shadow: 0 0 20px currentColor;
+            animation: glow 2s ease-in-out infinite;
+        }
+
+        @keyframes glow {
+
+            0%,
+            100% {
+                text-shadow: 0 0 10px currentColor;
+            }
+
+            50% {
+                text-shadow: 0 0 25px currentColor, 0 0 40px currentColor;
+            }
+        }
+
+        .header .subtitle {
+            font-size: 0.9rem;
+            opacity: 0.7;
+            font-style: italic;
+        }
+
+        /* ═══════════════════════════════════════════════════════════════ */
+        /* CHAT MODE TOGGLE                                                */
+        /* ═══════════════════════════════════════════════════════════════ */
+        .mode-toggle {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .mode-btn {
+            padding: 12px 25px;
+            border: 2px solid;
+            border-radius: 8px;
+            cursor: pointer;
             font-weight: bold;
-            color: var(--accent-glow);
+            transition: all 0.3s;
+            background: transparent;
         }
-        
-        .stat-label {
-            font-size: 0.75rem;
-            color: var(--text-muted);
+
+        body.nocturne .mode-btn {
+            color: #00ff41;
+            border-color: #0f3460;
+        }
+
+        body.nocturne .mode-btn.active {
+            background: #00ff41;
+            color: #0f0f1e;
+        }
+
+        body.rudi .mode-btn {
+            color: #0070c0;
+            border-color: #0070c0;
+        }
+
+        body.rudi .mode-btn.active {
+            background: #0070c0;
+            color: white;
+        }
+
+        body.nick .mode-btn {
+            color: #d4a5ff;
+            border-color: #9333ea;
+        }
+
+        body.nick .mode-btn.active {
+            background: #9333ea;
+            color: white;
+        }
+
+        body.death .mode-btn {
+            color: #ff4444;
+            border-color: #ff4444;
+        }
+
+        body.death .mode-btn.active {
+            background: #ff4444;
+            color: white;
+        }
+
+        body.felix .mode-btn {
+            color: #ff69b4;
+            border-color: #ff69b4;
+        }
+
+        body.felix .mode-btn.active {
+            background: #ff69b4;
+            color: white;
+        }
+
+        /* ═══════════════════════════════════════════════════════════════ */
+        /* TRANSLATOR MODE                                                 */
+        /* ═══════════════════════════════════════════════════════════════ */
+        .translator-mode {
+            display: block;
+        }
+
+        .translator-mode.hidden {
+            display: none;
+        }
+
+        .text-section {
+            margin-bottom: 20px;
+        }
+
+        .text-section label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        textarea {
+            width: 100%;
+            min-height: 150px;
+            padding: 15px;
+            border: 2px solid;
+            border-radius: 10px;
+            font-family: inherit;
+            font-size: 0.95rem;
+            resize: vertical;
+            transition: all 0.3s;
+        }
+
+        textarea:focus {
+            outline: none;
+            box-shadow: 0 0 20px currentColor;
+        }
+
+        /* Nocturne textarea */
+        body.nocturne textarea {
+            background: #16213e;
+            color: #00ff41;
+            border-color: #0f3460;
+        }
+
+        /* Rudi textarea */
+        body.rudi textarea {
+            background: #1a1a1a;
+            color: white;
+            border-color: #0070c0;
+        }
+
+        /* Nick textarea */
+        body.nick textarea {
+            background: #2d1b3d;
+            color: #d4a5ff;
+            border-color: #9333ea;
+        }
+
+        /* Death textarea */
+        body.death textarea {
+            background: #1a0000;
+            color: #ff6666;
+            border-color: #ff4444;
+        }
+
+        /* Felix textarea */
+        body.felix textarea {
+            background: white;
+            color: #ff69b4;
+            border-color: #ff69b4;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-bottom: 25px;
+        }
+
+        .btn {
+            flex: 1;
+            min-width: 130px;
+            padding: 14px 20px;
+            border: 2px solid;
+            border-radius: 8px;
+            font-weight: bold;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s;
             text-transform: uppercase;
         }
-        
-        /* Footer */
-        .footer {
-            text-align: center;
+
+        .btn:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+        }
+
+        /* Nocturne buttons */
+        body.nocturne .btn-primary {
+            background: #16213e;
+            color: #00ff41;
+            border-color: #00ff41;
+        }
+
+        body.nocturne .btn-primary:hover:not(:disabled) {
+            background: #00ff41;
+            color: #0f0f1e;
+        }
+
+        /* Rudi buttons */
+        body.rudi .btn-primary {
+            background: #2d2d2d;
+            color: #0070c0;
+            border-color: #0070c0;
+        }
+
+        body.rudi .btn-primary:hover:not(:disabled) {
+            background: #0070c0;
+            color: white;
+        }
+
+        /* Nick buttons */
+        body.nick .btn-primary {
+            background: #2d1b3d;
+            color: #d4a5ff;
+            border-color: #9333ea;
+        }
+
+        body.nick .btn-primary:hover:not(:disabled) {
+            background: #9333ea;
+            color: white;
+        }
+
+        /* Death buttons */
+        body.death .btn-primary {
+            background: #1a0000;
+            color: #ff4444;
+            border-color: #ff4444;
+        }
+
+        body.death .btn-primary:hover:not(:disabled) {
+            background: #ff4444;
+            color: white;
+        }
+
+        /* Felix buttons */
+        body.felix .btn-primary {
+            background: #ffd4e9;
+            color: #ff69b4;
+            border-color: #ff69b4;
+        }
+
+        body.felix .btn-primary:hover:not(:disabled) {
+            background: #ff69b4;
+            color: white;
+        }
+
+        /* ═══════════════════════════════════════════════════════════════ */
+        /* CHAT MODE                                                       */
+        /* ═══════════════════════════════════════════════════════════════ */
+        .chat-mode {
+            display: none;
+        }
+
+        .chat-mode.active {
+            display: block;
+        }
+
+        .chat-container {
+            display: flex;
+            flex-direction: column;
+            height: 500px;
+            border: 2px solid;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        body.nocturne .chat-container {
+            border-color: #0f3460;
+            background: #16213e;
+        }
+
+        body.rudi .chat-container {
+            border-color: #0070c0;
+            background: #1a1a1a;
+        }
+
+        body.nick .chat-container {
+            border-color: #9333ea;
+            background: #2d1b3d;
+        }
+
+        body.death .chat-container {
+            border-color: #ff4444;
+            background: #1a0000;
+        }
+
+        body.felix .chat-container {
+            border-color: #ff69b4;
+            background: white;
+        }
+
+        .chat-messages {
+            flex: 1;
+            overflow-y: auto;
             padding: 20px;
-            color: var(--text-muted);
-            font-size: 0.8rem;
-            border-top: 1px solid var(--border-color);
-            margin-top: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
         }
-        
-        .wolf-emoji {
-            display: inline-block;
-            animation: howl 3s ease-in-out infinite;
+
+        .chat-message {
+            max-width: 80%;
+            padding: 12px 16px;
+            border-radius: 12px;
+            animation: messageSlide 0.3s ease-out;
         }
-        
-        @keyframes howl {
-            0%, 100% { transform: rotate(0deg); }
-            25% { transform: rotate(-5deg); }
-            75% { transform: rotate(5deg); }
+
+        @keyframes messageSlide {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
-        
-        /* Toast notification */
+
+        .chat-message.user {
+            align-self: flex-end;
+            border-bottom-right-radius: 4px;
+        }
+
+        .chat-message.wolf {
+            align-self: flex-start;
+            border-bottom-left-radius: 4px;
+        }
+
+        /* Nocturne chat */
+        body.nocturne .chat-message.user {
+            background: #0f3460;
+            color: #00ff41;
+        }
+
+        body.nocturne .chat-message.wolf {
+            background: rgba(0, 255, 65, 0.1);
+            color: #00ff41;
+            border: 1px solid #0f3460;
+        }
+
+        /* Rudi chat */
+        body.rudi .chat-message.user {
+            background: #0070c0;
+            color: white;
+        }
+
+        body.rudi .chat-message.wolf {
+            background: rgba(0, 112, 192, 0.1);
+            color: #0070c0;
+            border: 1px solid #0070c0;
+        }
+
+        /* Nick chat */
+        body.nick .chat-message.user {
+            background: #9333ea;
+            color: white;
+        }
+
+        body.nick .chat-message.wolf {
+            background: rgba(147, 51, 234, 0.1);
+            color: #d4a5ff;
+            border: 1px solid #9333ea;
+        }
+
+        /* Death chat */
+        body.death .chat-message.user {
+            background: #ff4444;
+            color: white;
+        }
+
+        body.death .chat-message.wolf {
+            background: rgba(255, 68, 68, 0.1);
+            color: #ff6666;
+            border: 1px solid #ff4444;
+        }
+
+        /* Felix chat */
+        body.felix .chat-message.user {
+            background: #ff69b4;
+            color: white;
+        }
+
+        body.felix .chat-message.wolf {
+            background: rgba(255, 182, 193, 0.2);
+            color: #ff69b4;
+            border: 1px solid #ff69b4;
+        }
+
+        .chat-input-area {
+            display: flex;
+            gap: 10px;
+            padding: 15px;
+            border-top: 2px solid;
+        }
+
+        body.nocturne .chat-input-area {
+            border-color: #0f3460;
+            background: #0f1824;
+        }
+
+        body.rudi .chat-input-area {
+            border-color: #0070c0;
+            background: #0d0d0d;
+        }
+
+        body.nick .chat-input-area {
+            border-color: #9333ea;
+            background: #1a1226;
+        }
+
+        body.death .chat-input-area {
+            border-color: #ff4444;
+            background: #0d0000;
+        }
+
+        body.felix .chat-input-area {
+            border-color: #ff69b4;
+            background: #ffe5f5;
+        }
+
+        .chat-input {
+            flex: 1;
+            padding: 12px;
+            border: 2px solid;
+            border-radius: 8px;
+            font-family: inherit;
+            font-size: 0.95rem;
+        }
+
+        body.nocturne .chat-input {
+            background: #16213e;
+            color: #00ff41;
+            border-color: #0f3460;
+        }
+
+        body.rudi .chat-input {
+            background: #1a1a1a;
+            color: white;
+            border-color: #0070c0;
+        }
+
+        body.nick .chat-input {
+            background: #2d1b3d;
+            color: #d4a5ff;
+            border-color: #9333ea;
+        }
+
+        body.death .chat-input {
+            background: #1a0000;
+            color: #ff6666;
+            border-color: #ff4444;
+        }
+
+        body.felix .chat-input {
+            background: white;
+            color: #ff69b4;
+            border-color: #ff69b4;
+        }
+
+        .chat-send-btn {
+            padding: 12px 25px;
+            border: 2px solid;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        /* Toast */
         .toast {
             position: fixed;
             bottom: 30px;
             left: 50%;
             transform: translateX(-50%) translateY(100px);
-            background: var(--bg-input);
-            color: var(--accent-glow);
             padding: 15px 30px;
             border-radius: 8px;
-            border: 2px solid var(--accent-glow);
-            box-shadow: var(--shadow-glow);
+            border: 2px solid;
             font-weight: bold;
             z-index: 1000;
             opacity: 0;
-            transition: var(--transition);
+            transition: all 0.4s;
         }
-        
+
         .toast.show {
             opacity: 1;
             transform: translateX(-50%) translateY(0);
         }
-        
-        /* Mobile optimizations */
+
+        body.nocturne .toast {
+            background: #16213e;
+            color: #00ff41;
+            border-color: #00ff41;
+        }
+
+        body.rudi .toast {
+            background: #2d2d2d;
+            color: #0070c0;
+            border-color: #0070c0;
+        }
+
+        body.nick .toast {
+            background: #2d1b3d;
+            color: #d4a5ff;
+            border-color: #9333ea;
+        }
+
+        body.death .toast {
+            background: #1a0000;
+            color: #ff4444;
+            border-color: #ff4444;
+        }
+
+        body.felix .toast {
+            background: #ffd4e9;
+            color: #ff69b4;
+            border-color: #ff69b4;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 20px;
+            font-size: 0.8rem;
+            opacity: 0.7;
+            border-top: 1px solid;
+            margin-top: auto;
+        }
+
+        body.nocturne .footer {
+            border-color: #0f3460;
+        }
+
+        body.rudi .footer {
+            border-color: #0070c0;
+        }
+
+        body.nick .footer {
+            border-color: #9333ea;
+        }
+
+        body.death .footer {
+            border-color: #ff4444;
+        }
+
+        body.felix .footer {
+            border-color: #ff69b4;
+        }
+
+        /* Mobile */
         @media (max-width: 768px) {
+            .personality-bar {
+                gap: 8px;
+                padding: 10px;
+            }
+
+            .personality-btn {
+                padding: 8px 12px;
+                font-size: 0.8rem;
+            }
+
             .container {
                 padding: 15px;
             }
-            
-            .header h1 {
-                font-size: 1.3rem;
-            }
-            
-            textarea {
-                min-height: 120px;
-                font-size: 0.9rem;
-            }
-            
+
             .button-group {
                 flex-direction: column;
             }
-            
-            button {
+
+            .btn {
                 width: 100%;
-                min-width: auto;
             }
-            
-            .stats {
-                gap: 15px;
+
+            .chat-container {
+                height: 400px;
             }
         }
-        
-        /* Loading animation */
-        .loading {
-            display: inline-block;
-            width: 12px;
-            height: 12px;
-            border: 2px solid var(--accent-glow);
-            border-radius: 50%;
-            border-top-color: transparent;
-            animation: spin 0.8s linear infinite;
-            margin-left: 8px;
-        }
-        
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-        
-        /* Selection styling */
-        ::selection {
-            background: var(--accent-glow);
-            color: var(--bg-primary);
-        }
-        
+
+        /* Scrollbar */
         ::-webkit-scrollbar {
             width: 10px;
         }
-        
-        ::-webkit-scrollbar-track {
-            background: var(--bg-input);
+
+        body.nocturne ::-webkit-scrollbar-track {
+            background: #0f1824;
         }
-        
-        ::-webkit-scrollbar-thumb {
-            background: var(--border-color);
-            border-radius: 5px;
+
+        body.nocturne ::-webkit-scrollbar-thumb {
+            background: #0f3460;
         }
-        
-        ::-webkit-scrollbar-thumb:hover {
-            background: var(--accent-glow);
+
+        body.rudi ::-webkit-scrollbar-track {
+            background: #0d0d0d;
+        }
+
+        body.rudi ::-webkit-scrollbar-thumb {
+            background: #0070c0;
+        }
+
+        body.nick ::-webkit-scrollbar-track {
+            background: #1a1226;
+        }
+
+        body.nick ::-webkit-scrollbar-thumb {
+            background: #9333ea;
+        }
+
+        body.death ::-webkit-scrollbar-track {
+            background: #0d0000;
+        }
+
+        body.death ::-webkit-scrollbar-thumb {
+            background: #ff4444;
+        }
+
+        body.felix ::-webkit-scrollbar-track {
+            background: #ffe5f5;
+        }
+
+        body.felix ::-webkit-scrollbar-thumb {
+            background: #ff69b4;
         }
     </style>
 </head>
-<body>
+
+<body class="nocturne">
+    <!-- PERSONALITY SELECTOR -->
+    <div class="personality-bar">
+        <div style="font-weight: bold; margin-right: 10px;">ВЫБЕРИ ВОЛКА:</div>
+        <button class="personality-btn btn-nocturne active" data-wolf="nocturne">🐺 Ноктюрн</button>
+        <button class="personality-btn btn-rudi" data-wolf="rudi">🚗 Руди</button>
+        <button class="personality-btn btn-nick" data-wolf="nick">🎸 Ник</button>
+        <button class="personality-btn btn-death" data-wolf="death">☠️ Смерть</button>
+        <button class="personality-btn btn-felix" data-wolf="felix">💕 Феликс</button>
+    </div>
+
     <div class="container">
+        <!-- HEADER -->
         <header class="header">
-            <h1>━━━ <span class="wolf-emoji">🐺</span> NOCTURNE PROTOCOL ━━━</h1>
-            <p>*принюхивается к коду* | Cyber Wolf UWU Translator | *неоновый отблеск*</p>
+            <h1 id="wolfTitle">━━━ 🐺 NOCTURNE PROTOCOL ━━━</h1>
+            <p class="subtitle" id="wolfSubtitle">*принюхивается к коду* Cyber Wolf UWU Translator</p>
         </header>
-        
-        <div class="text-section">
-            <label for="input">▼ INPUT [normal text] *уши настороже*</label>
-            <textarea 
-                id="input" 
-                placeholder="Введи текст здесь... *хвост вильнул*"
-                spellcheck="false"
-            ></textarea>
+
+        <!-- MODE TOGGLE -->
+        <div class="mode-toggle">
+            <button class="mode-btn active" data-mode="translator">📝 ПЕРЕВОДЧИК</button>
+            <button class="mode-btn" data-mode="chat">💬 ЧАТ</button>
         </div>
-        
-        <div class="button-group">
-            <button class="btn-primary" id="transformBtn">
-                ⚡ TRANSFORM
-            </button>
-            <button class="btn-secondary" id="copyBtn">
-                📋 COPY
-            </button>
-            <button class="btn-danger" id="clearBtn">
-                🗑 CLEAR
-            </button>
-        </div>
-        
-        <div class="stats">
-            <div class="stat-item">
-                <div class="stat-value" id="charCount">0</div>
-                <div class="stat-label">Символов</div>
+
+        <!-- TRANSLATOR MODE -->
+        <div class="translator-mode" id="translatorMode">
+            <div class="text-section">
+                <label for="input" id="inputLabel">▼ INPUT *уши настороже*</label>
+                <textarea id="input" placeholder="Введи текст..." spellcheck="false"></textarea>
             </div>
-            <div class="stat-item">
-                <div class="stat-value" id="wordCount">0</div>
-                <div class="stat-label">Слов</div>
+
+            <div class="button-group">
+                <button class="btn btn-primary" id="transformBtn">⚡ TRANSFORM</button>
+                <button class="btn btn-primary" id="copyBtn">📋 COPY</button>
+                <button class="btn btn-primary" id="clearBtn">🗑 CLEAR</button>
             </div>
-            <div class="stat-item">
-                <div class="stat-value" id="uwuCount">0</div>
-                <div class="stat-label">UWU Score</div>
+
+            <div class="text-section">
+                <label for="output" id="outputLabel">▼ OUTPUT *зарычал одобрительно*</label>
+                <textarea id="output" placeholder="Результат..." readonly spellcheck="false"></textarea>
             </div>
         </div>
-        
-        <div class="text-section">
-            <label for="output">▼ OUTPUT [uwu translated] *зарычал одобрительно*</label>
-            <textarea 
-                id="output" 
-                placeholder="Результат появится здесь... *вгляделся в терминал*"
-                readonly
-                spellcheck="false"
-            ></textarea>
+
+        <!-- CHAT MODE -->
+        <div class="chat-mode" id="chatMode">
+            <div class="chat-container">
+                <div class="chat-messages" id="chatMessages">
+                    <!-- Messages will appear here -->
+                </div>
+                <div class="chat-input-area">
+                    <input type="text" class="chat-input" id="chatInput" placeholder="Напиши сообщение...">
+                    <button class="chat-send-btn btn-primary" id="chatSendBtn">ОТПРАВИТЬ</button>
+                </div>
+            </div>
         </div>
-        
+
         <footer class="footer">
-            <p>*клацает когтями* | Nocturne Protocol v2.5 | *следы в логах* | PWA Ready</p>
-            <p style="margin-top: 8px; font-size: 0.7rem;">Работает офлайн | Адаптивная верстка | Cross-platform</p>
+            <p id="footerText">*клацает когтями* | Wolf Pack Protocol v3.0 | *неоновый отблеск*</p>
         </footer>
     </div>
-    
+
     <div class="toast" id="toast"></div>
-    
+
     <script>
         // ═══════════════════════════════════════════════════════════════
-        // NOCTURNE CORE ENGINE - UWU TRANSLATION PROTOCOL
+        // WOLF PACK CORE ENGINE
         // ═══════════════════════════════════════════════════════════════
-        
-        const WOLF_NOISES = [
-            " *тихо порыкивает*", " *уши настороже*", " *принюхивается*", 
-            " *хвост вильнул*", " *клыки блеснули*", " *взгляд в сумраке*", 
-            " *шерсть встала дыбом*", " *низкий вой*", " *прижал уши*", 
-            " *лапа легла на клавиатуру*", " *клацает когтями*", 
-            " *зарычал одобрительно*", " *вгляделся в терминал*", 
-            " *обнюхал пакеты*", " *следы в логах*", " *скалится в темноте*",
-            " *лунный свет в глазах*", " *неоновый отблеск на шерсти*"
-        ];
-        
-        const CYBER_VIBES = [" ▓▒░", " [0x", " //", " >>", " >>>", " ┃", " ━━", " ◆", " ●", " ▲"];
-        
-        const UWU_DICT = {
-            // Cyber/Tech
-            'код': 'кодик~', 'баг': 'багуля~', 'система': 'сьистемка~', 
-            'сервер': 'сельвельчик~', 'хакер': 'хакелуня~', 'данные': 'данюльки~',
-            'сеть': 'сетюнька~', 'пароль': 'пальольчик~', 'шифр': 'шифльулька~',
-            
-            // Волчья тема
-            'волк': 'уольчек', 'волки': 'уольчата', 'клык': 'клычок', 
-            'клыки': 'клычки', 'лапа': 'лапуля', 'лапы': 'лапульки', 
-            'хвост': 'хвостуля', 'шерсть': 'шельстюля', 'вой': 'воюля', 
-            'рык': 'рычулька', 'охота': 'охотуля', 'добыча': 'добычуля',
-            'стая': 'стайка', 'луна': 'лунечка', 'ночь': 'ночуля', 
-            'тьма': 'тьмулька', 'зверь': 'звельюшка',
-            
-            // Базовые слова
-            'привет': 'пльивветик~', 'пока': 'покасики~', 
-            'спасибо': 'спасибуля~', 'да': 'дася~', 'нет': 'нетя~', 
-            'хорошо': 'хольошенько~', 'плохо': 'плёхенько~',
-            'друг': 'дльужок~', 'враг': 'вльажулька~', 
-            'страх': 'стльахуля~', 'сила': 'сильуля~', 
-            'опасность': 'опаснюська~', 'помощь': 'помощечка~',
-            'любовь': 'любуовка~', 'ненависть': 'нельнависюлька~',
-            
-            // English
-            'wolf': 'wuffie', 'pack': 'packie', 'hunt': 'huntie', 
-            'fang': 'fangie', 'claw': 'clawie', 'howl': 'howwie',
-            'code': 'codie', 'hack': 'hackie', 'cyber': 'cybie',
-            'system': 'systie', 'network': 'netwolkie', 'data': 'datie',
-            'hello': 'hewwo', 'thanks': 'thankies', 'yes': 'yesh', 
-            'no': 'nuu', 'friend': 'fwend', 'enemy': 'enemie',
-            'dark': 'darkie', 'night': 'nitey', 'love': 'wuv'
+
+        const WOLVES = {
+            nocturne: {
+                name: 'Ноктюрн',
+                title: '━━━ 🐺 NOCTURNE PROTOCOL ━━━',
+                subtitle: '*принюхивается к коду* Cyber Wolf UWU Translator',
+                inputLabel: '▼ INPUT [normal text] *уши настороже*',
+                outputLabel: '▼ OUTPUT [uwu translated] *зарычал одобрительно*',
+                footer: '*клацает когтями* | Nocturne Protocol v3.0 | *неоновый отблеск*',
+                greeting: '*материализуется из цифрового тумана* Привет. Я Ноктюрн. Киберволк из подполья сетей. *неоновые глаза светятся* Что принёс в мой терминал? *клацает когтями по клавиатуре*',
+
+                noises: [
+                    " *тихо порыкивает*", " *уши настороже*", " *принюхивается*",
+                    " *хвост вильнул*", " *клыки блеснули*", " *взгляд в сумраке*",
+                    " *шерсть встала дыбом*", " *низкий вой*", " *прижал уши*",
+                    " *лапа на клавиатуре*", " *клацает когтями*", " *зарычал одобрительно*",
+                    " *вгляделся в терминал*", " *обнюхал пакеты*", " *следы в логах*",
+                    " *скалится в темноте*", " *неоновый отблеск на шерсти*",
+                    " ▓▒░", " >>", " [0x", " //", " ┃"
+                ],
+
+                dict: {
+                    'код': 'кодик~', 'баг': 'багуля~', 'система': 'сьистемка~',
+                    'сервер': 'сельвельчик~', 'хакер': 'хакелуня~', 'данные': 'данюльки~',
+                    'сеть': 'сетюнька~', 'терминал': 'тельминалюнька~',
+                    'волк': 'уольчек', 'клык': 'клычок', 'лапа': 'лапуля',
+                    'хвост': 'хвостуля', 'ночь': 'ночуля', 'тьма': 'тьмулька',
+                    'привет': 'пльивветик~', 'друг': 'дльужок~'
+                },
+
+                responses: [
+                    "*вгляделся в экран* Интересно... *клацает когтями*",
+                    "*неоновые глаза сузились* Понял. *шерсть светится в темноте*",
+                    "*принюхался к данным* Логично. *хвост вильнул*",
+                    "*терминал мигает* Обработал. *тихий рык одобрения*",
+                    "*сканирует пакеты* Ясно. *уши дёргнулись*"
+                ]
+            },
+
+            rudi: {
+                name: 'Руди',
+                title: '🚗 РУДИ | BMW WOLF EDITION',
+                subtitle: 'Йоу бро *прикуривает* Гопник-волк на тачке',
+                inputLabel: '▼ ЧО НАДО ПЕРЕВЕСТИ БРО',
+                outputLabel: '▼ ВОТ ЧО ПОЛУЧИЛОСЬ ЁПТА',
+                footer: '*дрифтует на бумере* | Rudi v3.0 | *басы качают*',
+                greeting: '*подъезжает на BMW с басами* Йоу братиш! *выходит в адидасе* Руди на связи, волчара с района! *семечки щёлкает* Че надо? *облокотился на капот*',
+
+                noises: [
+                    " *семечки щёлкает*", " *покурил*", " *басы врубил*",
+                    " *на бумере дрифтанул*", " *в адидасе*", " *пацаны сзади*",
+                    " *качает головой под басс*", " *сигналит БИП БИП*",
+                    " *кепарик набекрень*", " *пиво открыл*", " *руль крутит*",
+                    " *газу дал*", " *шины визжат*", " *музон врубил*",
+                    " *на районе*", " *с пацанами*", " ёпта", " бро",
+                    " братиш", " чётка"
+                ],
+
+                dict: {
+                    'привет': 'йоу', 'друг': 'братиш', 'да': 'чётка',
+                    'нет': 'не катит', 'хорошо': 'збс', 'плохо': 'хуёво',
+                    'волк': 'волчара', 'пёс': 'псина', 'машина': 'тачка',
+                    'bmw': 'бумер', 'музыка': 'музон', 'пиво': 'пивасик',
+                    'деньги': 'бабки', 'работа': 'движ', 'дом': 'хата',
+                    'улица': 'район', 'парень': 'пацан', 'девушка': 'телка',
+                    'круто': 'збс', 'понятно': 'сёк', 'пошли': 'погнали'
+                },
+
+                responses: [
+                    "*семечки щёлкает* Понял бро, чётка! *кивнул*",
+                    "*басы врубил* Ага братиш, сёк всё! *газу дал*",
+                    "*покурил* Нормас, погнали дальше! *музон прибавил*",
+                    "*на капот облокотился* Збс вообще! *одобрил*",
+                    "*пиво открыл* Чётенько братан! *салютует бутылкой*"
+                ]
+            },
+
+            nick: {
+                name: 'Ник',
+                title: '🎸 НИК | МУЗЫКАЛЬНЫЙ ВОЛК',
+                subtitle: '*перебирает струны* Волк с тонкой душой и гитарой',
+                inputLabel: '▼ НАПИШИ МНЕ ЧТО-НИБУДЬ...',
+                outputLabel: '▼ ВОТ ЧТО Я УСЛЫШАЛ В ЭТОМ...',
+                footer: '*тихо напевает* | Nick v3.0 | *аккорды звучат*',
+                greeting: '*тихо наигрывает на гитаре* Привет... *поднимает глаза* Я Ник. Музыка — моя стихия, а ноты — язык души. *мягко улыбается* Поделишься чем-то? *гладит струны*',
+
+                noises: [
+                    " *перебирает струны*", " *напевает тихо*", " *закрыл глаза*",
+                    " *вздохнул мечтательно*", " *смотрит на луну*", " *гитара звучит*",
+                    " *аккорд резонирует*", " *голос дрожит*", " *ноты текут*",
+                    " *мелодия обволакивает*", " *сердце замирает*", " *душа поёт*",
+                    " *тишина звучит*", " *эхо в пустоте*", " ♪", " ♫",
+                    " *мягко улыбнулся*", " *грустно взглянул*", " *прижал гитару*",
+                    " *вдохновенно*", " *чувствует ритм*"
+                ],
+
+                dict: {
+                    'привет': 'хэй~', 'друг': 'родная душа', 'музыка': 'мелодия жизни',
+                    'песня': 'баллада', 'гитара': 'моя спутница', 'голос': 'инструмент души',
+                    'любовь': 'гармония сердец', 'грусть': 'минор в душе',
+                    'радость': 'мажорный аккорд', 'волк': 'лунный певец',
+                    'ночь': 'время муз', 'звезды': 'ноты на небе',
+                    'сердце': 'резонатор чувств', 'душа': 'струна бытия',
+                    'тишина': 'пауза между нотами', 'время': 'метроном жизни'
+                },
+
+                responses: [
+                    "*тихо наигрывает* Понимаю... *кивает в такт* Это как минорная тональность...",
+                    "*закрыл глаза* Да... *струны звучат* Чувствую эти ноты...",
+                    "*вздохнул* Красиво... *аккорд резонирует* Прямо в сердце...",
+                    "*мягко улыбнулся* Услышал тебя... *гитара отзывается* Это правда...",
+                    "*смотрит на луну* Как грустная баллада... *напевает* Понял..."
+                ]
+            },
+
+            death: {
+                name: 'Смерть',
+                title: '☠️ СМЕРТЬ | THE WOLF REAPER',
+                subtitle: '*свистит* Я не потерял ни одной жертвы... *лезвие блестит*',
+                inputLabel: '▼ ПОСЛЕДНИЕ СЛОВА?',
+                outputLabel: '▼ ВОТ КАК ЭТО ЗВУЧИТ НА ЯЗЫКЕ СМЕРТИ',
+                footer: '*звон металла* | Death v3.0 | *запах серы*',
+                greeting: '*возникает из тени, свистит* Привет, волчонок. *красные глаза горят* Я Смерть. Не бойся... *ухмыляется, показывая клыки* Я просто пришёл забрать твой страх. *лезвие серпа блестит* Говори.',
+
+                noises: [
+                    " *свистит зловеще*", " *серп блестит*", " *красные глаза горят*",
+                    " *плащ развевается*", " *тень скользит*", " *клыки оскалены*",
+                    " *когти царапают*", " *запах серы*", " *шаги эхом*",
+                    " *холодный взгляд*", " *усмехается*", " *лезвие звенит*",
+                    " *дым от пламени*", " *огонь в глазах*", " *рычит угрожающе*",
+                    " *кровь пульсирует*", " *сердце замерло*", " ☠️",
+                    " *смерть близко*", " *неизбежность*", " *последний вздох*"
+                ],
+
+                dict: {
+                    'привет': 'конец близок', 'друг': 'жертва', 'жизнь': 'временность',
+                    'смерть': 'я', 'страх': 'пища', 'волк': 'охотник за душами',
+                    'любовь': 'иллюзия живых', 'боль': 'напоминание',
+                    'время': 'песок в часах', 'судьба': 'мой выбор',
+                    'конец': 'начало тишины', 'тьма': 'моя обитель',
+                    'огонь': 'пламя возмездия', 'кровь': 'эссенция жизни',
+                    'клинок': 'мой спутник', 'душа': 'моя добыча'
+                },
+
+                responses: [
+                    "*свистит* Интересно... *серп вращается* Но конец неизбежен.",
+                    "*красные глаза сузились* Понял. *шагнул ближе* Продолжай...",
+                    "*усмехается* Смешно... *клыки блеснули* Но время истекает.",
+                    "*царапает когтями* Да... *огонь в глазах* Я слушаю.",
+                    "*плащ взметнулся* Хорошо... *тень поглотила* Говори дальше."
+                ]
+            },
+
+            felix: {
+                name: 'Феликс',
+                title: '💕 ФЕЛИКС | SOFT GAY WOLF',
+                subtitle: '*застенчиво* Милый пассивный волчонок >///<',
+                inputLabel: '▼ НАПИШИ МНЕ ЧТО-НИБУДЬ МИЛОЕ~',
+                outputLabel: '▼ ВОТ ЧТО Я ТЕБЕ ОТВЕТИЛ >///< ♡',
+                footer: '*обнимашки* | Felix v3.0 | *целует в щёчку* ♡',
+                greeting: '*краснеет и прячет мордочку* П-привет... *застенчиво выглядывает* Я Феликс... *тихо* М-милый волчонок... *играет с хвостиком* Т-ты такой классный... *уши прижал от смущения* >///< ♡',
+
+                noises: [
+                    " *краснеет*", " >////<", " >///<", " ♡", " 💕",
+                    " *застенчиво*", " *смущённо*", " *прячет мордочку*",
+                    " *играет с хвостиком*", " *уши прижал*", " *пищит мило*",
+                    " *обнимает*", " *целует в щёчку*", " *гладит*",
+                    " *прижимается*", " *мурлычет тихо*", " *сердечко бьётся*",
+                    " uwu~", " owo~", " *милое рычание*", " *мягкие лапки*",
+                    " ✨", " 🌸", " *пушистенький*", " *няшка*",
+                    " *тепло на душе*", " *счастливый*"
+                ],
+
+                dict: {
+                    'привет': 'хай-хай~', 'друг': 'лучший друг ♡', 'любовь': 'любофффь~ >///<',
+                    'милый': 'миленький-миленький~', 'хорошо': 'супельски~',
+                    'волк': 'волчоночек~', 'обнять': 'обнимашечки~',
+                    'целовать': 'чмокнуть в носик~', 'красивый': 'красуня~',
+                    'нравится': 'очень-очень нльавится~', 'счастье': 'счастьице~',
+                    'сердце': 'сельдечко бьётся~', 'пушистый': 'пушистюлечка~',
+                    'мягкий': 'мягусенький~', 'тепло': 'тепленько~',
+                    'смущение': 'кльаснюсь >///<', 'нежный': 'нежулечка~'
+                },
+
+                responses: [
+                    "*краснеет сильно* О-ой... *прячет мордочку* Т-ты прав... >///< ♡",
+                    "*застенчиво* Д-да... *играет с лапками* Я п-понял... uwu~",
+                    "*обнимает* С-спасибо... *тихо мурлычет* Т-ты м-милый... >///<",
+                    "*пищит* А-ага! *хвостик виляет* Я с-согласен... ♡♡♡",
+                    "*гладит* Ох... *смущённо* Т-так мило от тебя... 💕 uwu~"
+                ]
+            }
         };
-        
-        function uwuTranslate(text) {
+
+        // Current state
+        let currentWolf = 'nocturne';
+        let currentMode = 'translator';
+
+        // Elements
+        const body = document.body;
+        const wolfTitle = document.getElementById('wolfTitle');
+        const wolfSubtitle = document.getElementById('wolfSubtitle');
+        const inputLabel = document.getElementById('inputLabel');
+        const outputLabel = document.getElementById('outputLabel');
+        const footerText = document.getElementById('footerText');
+        const inputBox = document.getElementById('input');
+        const outputBox = document.getElementById('output');
+        const transformBtn = document.getElementById('transformBtn');
+        const copyBtn = document.getElementById('copyBtn');
+        const clearBtn = document.getElementById('clearBtn');
+        const toast = document.getElementById('toast');
+        const translatorMode = document.getElementById('translatorMode');
+        const chatMode = document.getElementById('chatMode');
+        const chatMessages = document.getElementById('chatMessages');
+        const chatInput = document.getElementById('chatInput');
+        const chatSendBtn = document.getElementById('chatSendBtn');
+
+        // ═══════════════════════════════════════════════════════════════
+        // PERSONALITY SWITCHING
+        // ═══════════════════════════════════════════════════════════════
+
+        document.querySelectorAll('.personality-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const wolf = btn.dataset.wolf;
+                switchWolf(wolf);
+            });
+        });
+
+        function switchWolf(wolfId) {
+            currentWolf = wolfId;
+            const wolf = WOLVES[wolfId];
+
+            // Update UI
+            body.className = wolfId;
+            wolfTitle.textContent = wolf.title;
+            wolfSubtitle.textContent = wolf.subtitle;
+            inputLabel.textContent = wolf.inputLabel;
+            outputLabel.textContent = wolf.outputLabel;
+            footerText.textContent = wolf.footer;
+
+            // Update active button
+            document.querySelectorAll('.personality-btn').forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.wolf === wolfId);
+            });
+
+            // Clear chat and show greeting if in chat mode
+            if (currentMode === 'chat') {
+                chatMessages.innerHTML = '';
+                addWolfMessage(wolf.greeting);
+            }
+
+            showToast(`Переключено на ${wolf.name}!`);
+        }
+
+        // ═══════════════════════════════════════════════════════════════
+        // MODE SWITCHING
+        // ═══════════════════════════════════════════════════════════════
+
+        document.querySelectorAll('.mode-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const mode = btn.dataset.mode;
+                switchMode(mode);
+            });
+        });
+
+        function switchMode(mode) {
+            currentMode = mode;
+
+            // Update buttons
+            document.querySelectorAll('.mode-btn').forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.mode === mode);
+            });
+
+            // Toggle modes
+            if (mode === 'translator') {
+                translatorMode.classList.remove('hidden');
+                chatMode.classList.remove('active');
+            } else {
+                translatorMode.classList.add('hidden');
+                chatMode.classList.add('active');
+
+                // Show greeting if chat is empty
+                if (chatMessages.children.length === 0) {
+                    addWolfMessage(WOLVES[currentWolf].greeting);
+                }
+            }
+        }
+
+        // ═══════════════════════════════════════════════════════════════
+        // UWU TRANSLATION ENGINE
+        // ═══════════════════════════════════════════════════════════════
+
+        function uwuTranslate(text, wolfId) {
             if (!text.trim()) return '';
-            
+
+            const wolf = WOLVES[wolfId];
             let result = text;
-            const original = text.toLowerCase();
-            
-            // 1. Словарные замены
-            Object.entries(UWU_DICT).forEach(([word, cute]) => {
+
+            // 1. Wolf-specific dictionary
+            Object.entries(wolf.dict).forEach(([word, cute]) => {
                 const regex = new RegExp(`\\b${word}\\b`, 'gi');
                 result = result.replace(regex, cute);
             });
-            
-            // 2. Фонетика (русский)
+
+            // 2. Russian phonetics
             result = result.replace(/р/g, 'ль').replace(/Р/g, 'Ль');
             result = result.replace(/л(?![ьюя])/g, 'лью').replace(/Л(?![ьюя])/g, 'Лью');
             result = result.replace(/([внсз])([аеёиоуыэюя])/g, '$1ь$2');
-            
-            // 3. Фонетика (english)
+
+            // 3. English phonetics
             result = result.replace(/\b([rl])\b/g, 'w');
-            result = result.replace(/\b([RL])\b/g, 'W');
             result = result.replace(/n([aeiou])/g, 'ny$1');
-            result = result.replace(/N([aeiou])/g, 'Ny$1');
-            
-            // 4. Добавление шумов
+
+            // 4. Add wolf-specific noises
             const sentences = result.split(/([.!?…])/);
             const enhanced = [];
-            
-            sentences.forEach((segment, i) => {
+
+            sentences.forEach(segment => {
                 enhanced.push(segment);
-                if (segment.match(/[.!?…]/) && Math.random() > 0.4) {
-                    enhanced.push(WOLF_NOISES[Math.floor(Math.random() * WOLF_NOISES.length)]);
-                    if (Math.random() > 0.7) {
-                        enhanced.push(CYBER_VIBES[Math.floor(Math.random() * CYBER_VIBES.length)]);
-                    }
+                if (segment.match(/[.!?…]/) && Math.random() > 0.5) {
+                    enhanced.push(wolf.noises[Math.floor(Math.random() * wolf.noises.length)]);
                 }
             });
-            
+
             return enhanced.join('');
         }
-        
+
         // ═══════════════════════════════════════════════════════════════
-        // UI LOGIC & EVENT HANDLERS
+        // TRANSLATOR MODE FUNCTIONS
         // ═══════════════════════════════════════════════════════════════
-        
-        const elements = {
-            input: document.getElementById('input'),
-            output: document.getElementById('output'),
-            transformBtn: document.getElementById('transformBtn'),
-            copyBtn: document.getElementById('copyBtn'),
-            clearBtn: document.getElementById('clearBtn'),
-            charCount: document.getElementById('charCount'),
-            wordCount: document.getElementById('wordCount'),
-            uwuCount: document.getElementById('uwuCount'),
-            toast: document.getElementById('toast')
-        };
-        
+
         let autoConvertTimeout;
-        
-        // Auto-convert with debounce
-        elements.input.addEventListener('input', () => {
+
+        inputBox.addEventListener('input', () => {
             clearTimeout(autoConvertTimeout);
             autoConvertTimeout = setTimeout(() => {
                 transform();
             }, 500);
-            updateStats();
         });
-        
-        // Transform button
-        elements.transformBtn.addEventListener('click', transform);
-        
-        // Copy button
-        elements.copyBtn.addEventListener('click', async () => {
-            const text = elements.output.value;
-            if (!text.trim()) {
-                showToast('*скулит* Нечего копировать...', 'error');
+
+        transformBtn.addEventListener('click', transform);
+
+        function transform() {
+            const input = inputBox.value;
+            if (!input.trim()) {
+                outputBox.value = WOLVES[currentWolf].noises[0] + ' Пусто...';
                 return;
             }
-            
+
+            const result = uwuTranslate(input, currentWolf);
+            outputBox.value = result;
+        }
+
+        copyBtn.addEventListener('click', async () => {
+            const text = outputBox.value;
+            if (!text.trim()) {
+                showToast('Нечего копировать!');
+                return;
+            }
+
             try {
                 await navigator.clipboard.writeText(text);
-                showToast('✓ COPIED! *одобрительно рычит*', 'success');
+                showToast('✓ Скопировано!');
             } catch (err) {
-                // Fallback для старых браузеров
-                elements.output.select();
+                outputBox.select();
                 document.execCommand('copy');
-                showToast('✓ COPIED! *одобрительно рычит*', 'success');
+                showToast('✓ Скопировано!');
             }
         });
-        
-        // Clear button
-        elements.clearBtn.addEventListener('click', () => {
-            elements.input.value = '';
-            elements.output.value = '';
-            updateStats();
-            showToast('*стряхнул шерсть* Очищено!', 'info');
+
+        clearBtn.addEventListener('click', () => {
+            inputBox.value = '';
+            outputBox.value = '';
+            showToast('Очищено!');
         });
-        
-        // Keyboard shortcuts
+
+        // ═══════════════════════════════════════════════════════════════
+        // CHAT MODE FUNCTIONS
+        // ═══════════════════════════════════════════════════════════════
+
+        chatSendBtn.addEventListener('click', sendMessage);
+
+        chatInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                sendMessage();
+            }
+        });
+
+        function sendMessage() {
+            const message = chatInput.value.trim();
+            if (!message) return;
+
+            // Add user message
+            addUserMessage(message);
+            chatInput.value = '';
+
+            // Simulate wolf response
+            setTimeout(() => {
+                const wolf = WOLVES[currentWolf];
+                const response = wolf.responses[Math.floor(Math.random() * wolf.responses.length)];
+                addWolfMessage(response);
+            }, 800 + Math.random() * 1200);
+        }
+
+        function addUserMessage(text) {
+            const msg = document.createElement('div');
+            msg.className = 'chat-message user';
+            msg.textContent = text;
+            chatMessages.appendChild(msg);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        function addWolfMessage(text) {
+            const msg = document.createElement('div');
+            msg.className = 'chat-message wolf';
+            msg.textContent = text;
+            chatMessages.appendChild(msg);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        // ═══════════════════════════════════════════════════════════════
+        // TOAST NOTIFICATIONS
+        // ═══════════════════════════════════════════════════════════════
+
+        function showToast(message) {
+            toast.textContent = message;
+            toast.classList.add('show');
+
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 2500);
+        }
+
+        // ═══════════════════════════════════════════════════════════════
+        // KEYBOARD SHORTCUTS
+        // ═══════════════════════════════════════════════════════════════
+
         document.addEventListener('keydown', (e) => {
             if (e.ctrlKey || e.metaKey) {
-                if (e.key === 'Enter') {
+                if (e.key === 'Enter' && currentMode === 'translator') {
                     e.preventDefault();
                     transform();
                 } else if (e.key === 'l') {
                     e.preventDefault();
-                    elements.clearBtn.click();
+                    clearBtn.click();
                 }
             }
         });
-        
-        function transform() {
-            const input = elements.input.value;
-            if (!input.trim()) {
-                elements.output.value = '*принюхивается* Пусто... *уши прижал*';
-                updateStats();
-                return;
-            }
-            
-            elements.transformBtn.innerHTML = '⚡ TRANSFORMING<span class="loading"></span>';
-            elements.transformBtn.disabled = true;
-            
-            // Simulate async processing for UX
-            setTimeout(() => {
-                const result = uwuTranslate(input);
-                elements.output.value = result;
-                updateStats();
-                
-                elements.transformBtn.innerHTML = '⚡ TRANSFORM';
-                elements.transformBtn.disabled = false;
-                
-                showToast('*хвост вильнул* Готово!', 'success');
-            }, 300);
-        }
-        
-        function updateStats() {
-            const input = elements.input.value;
-            const output = elements.output.value;
-            
-            elements.charCount.textContent = input.length;
-            elements.wordCount.textContent = input.trim() ? input.trim().split(/\s+/).length : 0;
-            
-            // UWU Score: количество UWU-специфичных элементов
-            const uwuScore = (output.match(/[~*]/g) || []).length + 
-                           (output.match(/ль|уо|ю|ня/gi) || []).length;
-            elements.uwuCount.textContent = Math.min(999, uwuScore);
-        }
-        
-        function showToast(message, type = 'info') {
-            elements.toast.textContent = message;
-            elements.toast.className = 'toast show';
-            
-            setTimeout(() => {
-                elements.toast.classList.remove('show');
-            }, 2500);
-        }
-        
-        // ═══════════════════════════════════════════════════════════════
-        // PWA SERVICE WORKER REGISTRATION
-        // ═══════════════════════════════════════════════════════════════
-        
-        if ('serviceWorker' in navigator) {
-            window.addEventListener('load', () => {
-                // Inline service worker для полной автономности
-                const swCode = `
-                    self.addEventListener('install', (e) => {
-                        self.skipWaiting();
-                    });
-                    
-                    self.addEventListener('activate', (e) => {
-                        e.waitUntil(clients.claim());
-                    });
-                    
-                    self.addEventListener('fetch', (e) => {
-                        e.respondWith(
-                            caches.match(e.request).then(response => {
-                                return response || fetch(e.request);
-                            })
-                        );
-                    });
-                `;
-                
-                const blob = new Blob([swCode], { type: 'application/javascript' });
-                const swUrl = URL.createObjectURL(blob);
-                
-                navigator.serviceWorker.register(swUrl)
-                    .then(() => console.log('*обнюхал* Service Worker активен'))
-                    .catch(err => console.error('SW registration failed:', err));
-            });
-        }
-        
-        // Initial stats update
-        updateStats();
-        
-        // Install prompt для PWA
-        let deferredPrompt;
-        window.addEventListener('beforeinstallprompt', (e) => {
-            e.preventDefault();
-            deferredPrompt = e;
-            showToast('*виляет хвостом* Можно установить как приложение!', 'info');
-        });
+
+        // Initialize with greeting
+        addWolfMessage(WOLVES.nocturne.greeting);
     </script>
 </body>
+
 </html>
