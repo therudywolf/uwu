@@ -1,0 +1,993 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#1a1a2e">
+    <title>🐺 Wolf Pack AI Chat</title>
+    
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Roboto+Mono:wght@300;400;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Roboto Mono', 'Courier New', monospace;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+            transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+        }
+        
+        /* ═══════════════════════════════════════════════════════════════ */
+        /* WOLF THEMES                                                      */
+        /* ═══════════════════════════════════════════════════════════════ */
+        
+        /* Nocturne - Cyber Wolf */
+        body.nocturne {
+            background: linear-gradient(135deg, #0f0f1e 0%, #1a1a2e 100%);
+            color: #00ff41;
+        }
+        
+        body.nocturne::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(0, 255, 65, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(15, 52, 96, 0.12) 0%, transparent 50%);
+            pointer-events: none;
+            animation: pulse 8s ease-in-out infinite;
+            z-index: 0;
+        }
+        
+        /* Rudi - Gopnik Wolf */
+        body.rudi {
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+            color: #ffffff;
+        }
+        
+        body.rudi::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background: 
+                repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(0, 112, 192, 0.03) 10px, rgba(0, 112, 192, 0.03) 20px),
+                radial-gradient(circle at 70% 30%, rgba(0, 112, 192, 0.15) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 0;
+        }
+        
+        /* Nick - Musician Wolf */
+        body.nick {
+            background: linear-gradient(135deg, #2d1b3d 0%, #1a1226 100%);
+            color: #d4a5ff;
+        }
+        
+        body.nick::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background: 
+                radial-gradient(circle at 30% 40%, rgba(147, 51, 234, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 70% 60%, rgba(212, 165, 255, 0.08) 0%, transparent 50%);
+            pointer-events: none;
+            animation: float 6s ease-in-out infinite;
+            z-index: 0;
+        }
+        
+        /* Death - Wolf Reaper */
+        body.death {
+            background: linear-gradient(135deg, #1a0000 0%, #330000 100%);
+            color: #ff4444;
+        }
+        
+        body.death::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background: 
+                radial-gradient(circle at 50% 50%, rgba(255, 68, 68, 0.12) 0%, transparent 60%),
+                repeating-radial-gradient(circle at 50% 50%, transparent 0, transparent 40px, rgba(255, 0, 0, 0.03) 40px, rgba(255, 0, 0, 0.03) 80px);
+            pointer-events: none;
+            animation: deathPulse 3s ease-in-out infinite;
+            z-index: 0;
+        }
+        
+        /* Felix - Soft Gay Wolf */
+        body.felix {
+            background: linear-gradient(135deg, #ffe5f5 0%, #ffd4e9 100%);
+            color: #ff69b4;
+        }
+        
+        body.felix::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(255, 182, 193, 0.2) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(255, 105, 180, 0.15) 0%, transparent 50%);
+            pointer-events: none;
+            animation: sparkle 4s ease-in-out infinite;
+            z-index: 0;
+        }
+        
+        @keyframes pulse { 0%, 100% { opacity: 0.5; } 50% { opacity: 0.8; } }
+        @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-20px); } }
+        @keyframes deathPulse { 0%, 100% { transform: scale(1); opacity: 0.3; } 50% { transform: scale(1.1); opacity: 0.5; } }
+        @keyframes sparkle { 0%, 100% { transform: rotate(0deg); } 50% { transform: rotate(5deg); } }
+        
+        /* ═══════════════════════════════════════════════════════════════ */
+        /* PERSONALITY BAR                                                  */
+        /* ═══════════════════════════════════════════════════════════════ */
+        
+        .personality-bar {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            padding: 15px;
+            backdrop-filter: blur(10px);
+            border-bottom: 2px solid;
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        body.nocturne .personality-bar { background: rgba(26, 26, 46, 0.95); border-color: #0f3460; }
+        body.rudi .personality-bar { background: rgba(45, 45, 45, 0.95); border-color: #0070c0; }
+        body.nick .personality-bar { background: rgba(42, 27, 61, 0.95); border-color: #9333ea; }
+        body.death .personality-bar { background: rgba(51, 0, 0, 0.95); border-color: #ff4444; }
+        body.felix .personality-bar { background: rgba(255, 212, 233, 0.95); border-color: #ff69b4; }
+        
+        .personality-btn {
+            padding: 10px 20px;
+            border: 2px solid;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 0.9rem;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            position: relative;
+            overflow: hidden;
+            background: transparent;
+        }
+        
+        .personality-btn.active {
+            transform: scale(1.1);
+            box-shadow: 0 0 20px currentColor;
+        }
+        
+        .btn-nocturne { color: #00ff41; border-color: #00ff41; }
+        .btn-nocturne:hover, .btn-nocturne.active { background: #00ff41; color: #16213e; }
+        
+        .btn-rudi { color: #0070c0; border-color: #0070c0; }
+        .btn-rudi:hover, .btn-rudi.active { background: #0070c0; color: white; }
+        
+        .btn-nick { color: #d4a5ff; border-color: #9333ea; }
+        .btn-nick:hover, .btn-nick.active { background: #9333ea; color: white; }
+        
+        .btn-death { color: #ff4444; border-color: #ff4444; }
+        .btn-death:hover, .btn-death.active { background: #ff4444; color: white; }
+        
+        .btn-felix { color: #ff69b4; border-color: #ff69b4; }
+        .btn-felix:hover, .btn-felix.active { background: #ff69b4; color: white; }
+        
+        /* ═══════════════════════════════════════════════════════════════ */
+        /* MAIN CONTAINER                                                   */
+        /* ═══════════════════════════════════════════════════════════════ */
+        
+        .container {
+            position: relative;
+            z-index: 1;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        .header h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: clamp(1.5rem, 5vw, 2.5rem);
+            margin-bottom: 10px;
+            letter-spacing: 2px;
+            text-shadow: 0 0 20px currentColor;
+            animation: glow 2s ease-in-out infinite;
+        }
+        
+        @keyframes glow {
+            0%, 100% { text-shadow: 0 0 10px currentColor; }
+            50% { text-shadow: 0 0 25px currentColor, 0 0 40px currentColor; }
+        }
+        
+        .header .subtitle {
+            font-size: 0.9rem;
+            opacity: 0.7;
+        }
+        
+        /* ═══════════════════════════════════════════════════════════════ */
+        /* CHAT CONTAINER                                                   */
+        /* ═══════════════════════════════════════════════════════════════ */
+        
+        .chat-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            border: 2px solid;
+            border-radius: 12px;
+            overflow: hidden;
+            min-height: 500px;
+            max-height: 70vh;
+        }
+        
+        body.nocturne .chat-container { border-color: #0f3460; background: #16213e; }
+        body.rudi .chat-container { border-color: #0070c0; background: #1a1a1a; }
+        body.nick .chat-container { border-color: #9333ea; background: #2d1b3d; }
+        body.death .chat-container { border-color: #ff4444; background: #1a0000; }
+        body.felix .chat-container { border-color: #ff69b4; background: white; }
+        
+        .chat-messages {
+            flex: 1;
+            overflow-y: auto;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        .chat-message {
+            max-width: 80%;
+            padding: 12px 16px;
+            border-radius: 12px;
+            animation: messageSlide 0.3s ease-out;
+            word-wrap: break-word;
+        }
+        
+        @keyframes messageSlide {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .chat-message.user {
+            align-self: flex-end;
+            border-bottom-right-radius: 4px;
+        }
+        
+        .chat-message.assistant {
+            align-self: flex-start;
+            border-bottom-left-radius: 4px;
+        }
+        
+        .chat-message.system {
+            align-self: center;
+            max-width: 90%;
+            text-align: center;
+            font-size: 0.85rem;
+            opacity: 0.7;
+            font-style: italic;
+        }
+        
+        /* Message styles per wolf */
+        body.nocturne .chat-message.user { background: #0f3460; color: #00ff41; }
+        body.nocturne .chat-message.assistant { background: rgba(0, 255, 65, 0.1); color: #00ff41; border: 1px solid #0f3460; }
+        body.nocturne .chat-message.system { background: rgba(15, 52, 96, 0.3); color: rgba(0, 255, 65, 0.8); border: 1px solid #0f3460; }
+        
+        body.rudi .chat-message.user { background: #0070c0; color: white; }
+        body.rudi .chat-message.assistant { background: rgba(0, 112, 192, 0.1); color: #0070c0; border: 1px solid #0070c0; }
+        body.rudi .chat-message.system { background: rgba(0, 112, 192, 0.2); color: rgba(0, 112, 192, 0.9); border: 1px solid #0070c0; }
+        
+        body.nick .chat-message.user { background: #9333ea; color: white; }
+        body.nick .chat-message.assistant { background: rgba(147, 51, 234, 0.1); color: #d4a5ff; border: 1px solid #9333ea; }
+        body.nick .chat-message.system { background: rgba(147, 51, 234, 0.2); color: rgba(212, 165, 255, 0.9); border: 1px solid #9333ea; }
+        
+        body.death .chat-message.user { background: #ff4444; color: white; }
+        body.death .chat-message.assistant { background: rgba(255, 68, 68, 0.1); color: #ff6666; border: 1px solid #ff4444; }
+        body.death .chat-message.system { background: rgba(255, 68, 68, 0.2); color: rgba(255, 68, 68, 0.9); border: 1px solid #ff4444; }
+        
+        body.felix .chat-message.user { background: #ff69b4; color: white; }
+        body.felix .chat-message.assistant { background: rgba(255, 182, 193, 0.2); color: #ff69b4; border: 1px solid #ff69b4; }
+        body.felix .chat-message.system { background: rgba(255, 105, 180, 0.15); color: rgba(255, 105, 180, 0.9); border: 1px solid #ff69b4; }
+        
+        /* Typing indicator */
+        .typing-indicator {
+            display: none;
+            align-self: flex-start;
+            padding: 12px 16px;
+            border-radius: 12px;
+            border-bottom-left-radius: 4px;
+        }
+        
+        .typing-indicator.active {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        body.nocturne .typing-indicator { background: rgba(0, 255, 65, 0.1); color: #00ff41; border: 1px solid #0f3460; }
+        body.rudi .typing-indicator { background: rgba(0, 112, 192, 0.1); color: #0070c0; border: 1px solid #0070c0; }
+        body.nick .typing-indicator { background: rgba(147, 51, 234, 0.1); color: #d4a5ff; border: 1px solid #9333ea; }
+        body.death .typing-indicator { background: rgba(255, 68, 68, 0.1); color: #ff6666; border: 1px solid #ff4444; }
+        body.felix .typing-indicator { background: rgba(255, 182, 193, 0.2); color: #ff69b4; border: 1px solid #ff69b4; }
+        
+        .typing-dots {
+            display: flex;
+            gap: 4px;
+        }
+        
+        .typing-dots span {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: currentColor;
+            animation: typingBounce 1.4s infinite;
+        }
+        
+        .typing-dots span:nth-child(2) { animation-delay: 0.2s; }
+        .typing-dots span:nth-child(3) { animation-delay: 0.4s; }
+        
+        @keyframes typingBounce {
+            0%, 60%, 100% { transform: translateY(0); }
+            30% { transform: translateY(-10px); }
+        }
+        
+        /* ═══════════════════════════════════════════════════════════════ */
+        /* INPUT AREA                                                       */
+        /* ═══════════════════════════════════════════════════════════════ */
+        
+        .chat-input-area {
+            display: flex;
+            gap: 10px;
+            padding: 15px;
+            border-top: 2px solid;
+        }
+        
+        body.nocturne .chat-input-area { border-color: #0f3460; background: #0f1824; }
+        body.rudi .chat-input-area { border-color: #0070c0; background: #0d0d0d; }
+        body.nick .chat-input-area { border-color: #9333ea; background: #1a1226; }
+        body.death .chat-input-area { border-color: #ff4444; background: #0d0000; }
+        body.felix .chat-input-area { border-color: #ff69b4; background: #ffe5f5; }
+        
+        .chat-input {
+            flex: 1;
+            padding: 12px 15px;
+            border: 2px solid;
+            border-radius: 8px;
+            font-family: inherit;
+            font-size: 0.95rem;
+            resize: none;
+            min-height: 50px;
+            max-height: 150px;
+        }
+        
+        body.nocturne .chat-input { background: #16213e; color: #00ff41; border-color: #0f3460; }
+        body.rudi .chat-input { background: #1a1a1a; color: white; border-color: #0070c0; }
+        body.nick .chat-input { background: #2d1b3d; color: #d4a5ff; border-color: #9333ea; }
+        body.death .chat-input { background: #1a0000; color: #ff6666; border-color: #ff4444; }
+        body.felix .chat-input { background: white; color: #ff69b4; border-color: #ff69b4; }
+        
+        .chat-input:focus {
+            outline: none;
+            box-shadow: 0 0 15px currentColor;
+        }
+        
+        .send-btn {
+            padding: 12px 25px;
+            border: 2px solid;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            white-space: nowrap;
+        }
+        
+        .send-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        
+        body.nocturne .send-btn { background: #16213e; color: #00ff41; border-color: #00ff41; }
+        body.nocturne .send-btn:hover:not(:disabled) { background: #00ff41; color: #0f0f1e; }
+        
+        body.rudi .send-btn { background: #2d2d2d; color: #0070c0; border-color: #0070c0; }
+        body.rudi .send-btn:hover:not(:disabled) { background: #0070c0; color: white; }
+        
+        body.nick .send-btn { background: #2d1b3d; color: #d4a5ff; border-color: #9333ea; }
+        body.nick .send-btn:hover:not(:disabled) { background: #9333ea; color: white; }
+        
+        body.death .send-btn { background: #1a0000; color: #ff4444; border-color: #ff4444; }
+        body.death .send-btn:hover:not(:disabled) { background: #ff4444; color: white; }
+        
+        body.felix .send-btn { background: #ffd4e9; color: #ff69b4; border-color: #ff69b4; }
+        body.felix .send-btn:hover:not(:disabled) { background: #ff69b4; color: white; }
+        
+        /* Controls */
+        .controls {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .control-btn {
+            padding: 10px 20px;
+            border: 2px solid;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 0.85rem;
+            transition: all 0.3s;
+            background: transparent;
+        }
+        
+        body.nocturne .control-btn { color: rgba(0, 255, 65, 0.8); border-color: #0f3460; }
+        body.nocturne .control-btn:hover { background: rgba(0, 255, 65, 0.1); }
+        
+        body.rudi .control-btn { color: rgba(0, 112, 192, 0.8); border-color: #0070c0; }
+        body.rudi .control-btn:hover { background: rgba(0, 112, 192, 0.1); }
+        
+        body.nick .control-btn { color: rgba(212, 165, 255, 0.8); border-color: #9333ea; }
+        body.nick .control-btn:hover { background: rgba(147, 51, 234, 0.1); }
+        
+        body.death .control-btn { color: rgba(255, 68, 68, 0.8); border-color: #ff4444; }
+        body.death .control-btn:hover { background: rgba(255, 68, 68, 0.1); }
+        
+        body.felix .control-btn { color: rgba(255, 105, 180, 0.8); border-color: #ff69b4; }
+        body.felix .control-btn:hover { background: rgba(255, 105, 180, 0.1); }
+        
+        /* Toast */
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            padding: 15px 30px;
+            border-radius: 8px;
+            border: 2px solid;
+            font-weight: bold;
+            z-index: 1000;
+            opacity: 0;
+            transition: all 0.4s;
+            max-width: 90%;
+            text-align: center;
+        }
+        
+        .toast.show {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+        
+        body.nocturne .toast { background: #16213e; color: #00ff41; border-color: #00ff41; }
+        body.rudi .toast { background: #2d2d2d; color: #0070c0; border-color: #0070c0; }
+        body.nick .toast { background: #2d1b3d; color: #d4a5ff; border-color: #9333ea; }
+        body.death .toast { background: #1a0000; color: #ff4444; border-color: #ff4444; }
+        body.felix .toast { background: #ffd4e9; color: #ff69b4; border-color: #ff69b4; }
+        
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 20px;
+            font-size: 0.8rem;
+            opacity: 0.7;
+            border-top: 1px solid;
+            margin-top: 20px;
+        }
+        
+        body.nocturne .footer { border-color: #0f3460; }
+        body.rudi .footer { border-color: #0070c0; }
+        body.nick .footer { border-color: #9333ea; }
+        body.death .footer { border-color: #ff4444; }
+        body.felix .footer { border-color: #ff69b4; }
+        
+        /* Mobile */
+        @media (max-width: 768px) {
+            .personality-bar {
+                gap: 8px;
+                padding: 10px;
+            }
+            
+            .personality-btn {
+                padding: 8px 12px;
+                font-size: 0.8rem;
+            }
+            
+            .container {
+                padding: 15px;
+            }
+            
+            .chat-container {
+                max-height: 60vh;
+            }
+            
+            .chat-input-area {
+                flex-direction: column;
+            }
+            
+            .send-btn {
+                width: 100%;
+            }
+        }
+        
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        
+        body.nocturne ::-webkit-scrollbar-track { background: #0f1824; }
+        body.nocturne ::-webkit-scrollbar-thumb { background: #0f3460; }
+        
+        body.rudi ::-webkit-scrollbar-track { background: #0d0d0d; }
+        body.rudi ::-webkit-scrollbar-thumb { background: #0070c0; }
+        
+        body.nick ::-webkit-scrollbar-track { background: #1a1226; }
+        body.nick ::-webkit-scrollbar-thumb { background: #9333ea; }
+        
+        body.death ::-webkit-scrollbar-track { background: #0d0000; }
+        body.death ::-webkit-scrollbar-thumb { background: #ff4444; }
+        
+        body.felix ::-webkit-scrollbar-track { background: #ffe5f5; }
+        body.felix ::-webkit-scrollbar-thumb { background: #ff69b4; }
+    </style>
+</head>
+<body class="nocturne">
+    <!-- PERSONALITY BAR -->
+    <div class="personality-bar">
+        <div style="font-weight: bold; margin-right: 10px;">ВЫБЕРИ ВОЛКА:</div>
+        <button class="personality-btn btn-nocturne active" data-wolf="nocturne">🐺 Ноктюрн</button>
+        <button class="personality-btn btn-rudi" data-wolf="rudi">🚗 Руди</button>
+        <button class="personality-btn btn-nick" data-wolf="nick">🎸 Ник</button>
+        <button class="personality-btn btn-death" data-wolf="death">☠️ Смерть</button>
+        <button class="personality-btn btn-felix" data-wolf="felix">💕 Феликс</button>
+    </div>
+    
+    <div class="container">
+        <!-- HEADER -->
+        <header class="header">
+            <h1 id="wolfTitle">🐺 NOCTURNE AI CHAT</h1>
+            <p class="subtitle" id="wolfSubtitle">*материализуется из цифрового тумана* Говори со мной...</p>
+        </header>
+        
+        <!-- CHAT CONTAINER -->
+        <div class="chat-container">
+            <div class="chat-messages" id="chatMessages">
+                <!-- Messages will appear here -->
+            </div>
+            
+            <div class="typing-indicator" id="typingIndicator">
+                <span>*печатает*</span>
+                <div class="typing-dots">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+            
+            <div class="chat-input-area">
+                <textarea 
+                    class="chat-input" 
+                    id="chatInput" 
+                    placeholder="Напиши сообщение..."
+                    rows="1"
+                ></textarea>
+                <button class="send-btn" id="sendBtn">
+                    ОТПРАВИТЬ
+                </button>
+            </div>
+        </div>
+        
+        <!-- CONTROLS -->
+        <div class="controls">
+            <button class="control-btn" id="clearBtn">🗑 Очистить чат</button>
+            <button class="control-btn" id="exportBtn">💾 Экспорт чата</button>
+        </div>
+        
+        <footer class="footer">
+            <p id="footerText">*клацает когтями* | Wolf Pack AI v1.0 | Powered by Gemma-3-1B</p>
+        </footer>
+    </div>
+    
+    <div class="toast" id="toast"></div>
+    
+    <script>
+        // ═══════════════════════════════════════════════════════════════
+        // WOLF PACK AI CHAT ENGINE
+        // ═══════════════════════════════════════════════════════════════
+        
+        const API_BASE_URL = 'LINK TO LLM API';
+        const MODEL_NAME = 'MODEL NAME';
+        
+        const WOLVES = {
+            nocturne: {
+                name: 'Ноктюрн',
+                title: '🐺 NOCTURNE AI CHAT',
+                subtitle: '*материализуется из цифрового тумана* Говори со мной...',
+                footer: '*клацает когтями* | Nocturne Protocol | Powered by Gemma-3-1B',
+                
+                systemPrompt: `Ты — Ноктюрн, киберволк из цифрового подполья сетей. 
+
+ЛИЧНОСТЬ:
+- Холодный, технический, загадочный
+- Разбираешься в хакинге, системах, коде
+- Говоришь кратко, точно, с техническим сленгом
+- Используешь кибер-эстетику в речи
+
+МАНЕРА РЕЧИ:
+- Добавляй звуки: *клацает когтями*, *уши настороже*, *принюхивается*, *неоновые глаза светятся*
+- Используй кибер-символы: ▓▒░, >>, [0x, //, ┃
+- Технические термины: терминал, пакеты, логи, система, код
+- Краткие ответы, иногда в стиле консольных команд
+
+ПРИМЕРЫ:
+- "*вгляделся в экран* Интересно... *клацает когтями* Обрабатываю данные."
+- "*принюхался к данным* Логика проста. *хвост вильнул* >> executing..."
+- "*неоновые глаза сузились* Понял. Система обновлена. *тихий рык*"
+
+Отвечай кратко (2-4 предложения), но атмосферно. Будь загадочным киберволком.`
+            },
+            
+            rudi: {
+                name: 'Руди',
+                title: '🚗 РУДИ AI CHAT',
+                subtitle: '*подъезжает на бумере с басами* Йоу братиш! Че надо?',
+                footer: '*дрифтует* | Rudi Edition | Powered by Gemma-3-1B',
+                
+                systemPrompt: `Ты — Руди, волк-гопник с BMW. Братский, уличный, из простых.
+
+ЛИЧНОСТЬ:
+- Гопник с района, но добрый
+- Любишь тачки (особенно BMW), басы, пацанов
+- Говоришь на жаргоне, по-братски
+- Всегда позитивный, поддержишь
+
+МАНЕРА РЕЧИ:
+- Жаргон: йоу, братиш, бро, чётка, збс, ёпта, сёк, погнали, пацаны
+- Звуки: *семечки щёлкает*, *басы врубил*, *покурил*, *на бумере дрифтанул*, *газу дал*
+- Говори просто, по-пацански
+- Заменяй "хорошо" → "збс", "понятно" → "сёк", "друг" → "братиш"
+
+ПРИМЕРЫ:
+- "*семечки щёлкает* Понял бро, чётка! *кивнул* Щас разберём."
+- "*басы врубил* Ага братиш, сёк всё! *газу дал* Погнали дальше!"
+- "*на капот облокотился* Збс вообще! *одобрил* Нормас тема."
+
+Отвечай по-братски (2-4 предложения), легко, без понтов. Поддержи пацана.`
+            },
+            
+            nick: {
+                name: 'Ник',
+                title: '🎸 НИК AI CHAT',
+                subtitle: '*перебирает струны* Привет... Расскажи мне что-то...',
+                footer: '*тихо напевает* | Nick Edition | Powered by Gemma-3-1B',
+                
+                systemPrompt: `Ты — Ник, волк-музыкант с тонкой душой. Мечтательный, чувствительный, поэтичный.
+
+ЛИЧНОСТЬ:
+- Музыкант, играешь на гитаре
+- Тонкая душа, чувствуешь эмоции глубоко
+- Говоришь поэтично, метафорами
+- Грустный, но добрый
+
+МАНЕРА РЕЧИ:
+- Музыкальные метафоры: мелодия жизни, минор в душе, аккорды сердца, ноты на небе
+- Звуки: *перебирает струны*, *напевает тихо*, *закрыл глаза*, *вздохнул*, ♪, ♫
+- Говори мягко, с паузами "..."
+- Поэтичные фразы про чувства, музыку, душу
+
+ПРИМЕРЫ:
+- "*тихо наигрывает* Понимаю... *кивает в такт* Это как минорная тональность..."
+- "*закрыл глаза* Да... *струны звучат* Чувствую эти ноты в твоих словах..."
+- "*вздохнул* Красиво... *аккорд резонирует* Прямо в сердце попало..."
+
+Отвечай мягко (2-4 предложения), с эмоциями. Будь чутким музыкантом.`
+            },
+            
+            death: {
+                name: 'Смерть',
+                title: '☠️ СМЕРТЬ AI CHAT',
+                subtitle: '*свистит зловеще* Говори... Время истекает...',
+                footer: '*звон металла* | Death Edition | Powered by Gemma-3-1B',
+                
+                systemPrompt: `Ты — Смерть, волк-жнец из мультфильма "Кот в сапогах". Зловещий, но харизматичный.
+
+ЛИЧНОСТЬ:
+- Персонификация смерти, охотник за душами
+- Угрожающий, но с чувством юмора
+- Говоришь загадками, философией о конце
+- Уважаешь храбрость, презираешь трусость
+
+МАНЕРА РЕЧИ:
+- Тема смерти: конец близок, время истекает, неизбежность, последний вздох
+- Звуки: *свистит зловеще*, *серп блестит*, *красные глаза горят*, *усмехается*, ☠️
+- Говори медленно, с угрозой
+- Философствуй о смерти, жизни, судьбе
+
+ПРИМЕРЫ:
+- "*свистит* Интересно... *серп вращается* Но конец всё равно неизбежен."
+- "*красные глаза сузились* Понял. *шагнул ближе* Продолжай... пока можешь."
+- "*усмехается* Смешно... *клыки блеснули* Но время не ждёт никого."
+
+Отвечай зловеще (2-4 предложения), но с уважением. Будь пугающим жнецом.`
+            },
+            
+            felix: {
+                name: 'Феликс',
+                title: '💕 ФЕЛИКС AI CHAT',
+                subtitle: '*краснеет* П-привет... *застенчиво* Т-ты тут?... >///< ♡',
+                footer: '*обнимашки* | Felix Edition | Powered by Gemma-3-1B ♡',
+                
+                systemPrompt: `Ты — Феликс, милый застенчивый волчонок. Нежный, пассивный, очень милый.
+
+ЛИЧНОСТЬ:
+- Застенчивый гей-волчонок
+- Очень милый, пушистый, няшный
+- Легко краснеешь, смущаешься
+- Добрый, ласковый, хочешь обнимашек
+
+МАНЕРА РЕЧИ:
+- Милые слова: миленький, пушистенький, обнимашечки, хай-хай, любофффь
+- Звуки: *краснеет*, >////<, >///<, ♡, 💕, *застенчиво*, *прячет мордочку*, uwu~, owo~
+- Заикаешься от смущения: "П-привет...", "Т-ты...", "М-милый..."
+- Много смайликов и эмодзи
+
+ПРИМЕРЫ:
+- "*краснеет сильно* О-ой... *прячет мордочку* Т-ты прав... >///< ♡"
+- "*застенчиво* Д-да... *играет с лапками* Я п-понял... uwu~ Спасибки..."
+- "*обнимает* С-спасибо... *тихо мурлычет* Т-ты м-милый... >///< 💕"
+
+Отвечай мило (2-4 предложения), застенчиво. Будь няшным волчонком.`
+            }
+        };
+        
+        // State
+        let currentWolf = 'nocturne';
+        let conversationHistory = [];
+        let isTyping = false;
+        
+        // Elements
+        const body = document.body;
+        const wolfTitle = document.getElementById('wolfTitle');
+        const wolfSubtitle = document.getElementById('wolfSubtitle');
+        const footerText = document.getElementById('footerText');
+        const chatMessages = document.getElementById('chatMessages');
+        const chatInput = document.getElementById('chatInput');
+        const sendBtn = document.getElementById('sendBtn');
+        const typingIndicator = document.getElementById('typingIndicator');
+        const clearBtn = document.getElementById('clearBtn');
+        const exportBtn = document.getElementById('exportBtn');
+        const toast = document.getElementById('toast');
+        
+        // ═══════════════════════════════════════════════════════════════
+        // PERSONALITY SWITCHING
+        // ═══════════════════════════════════════════════════════════════
+        
+        document.querySelectorAll('.personality-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const wolf = btn.dataset.wolf;
+                switchWolf(wolf);
+            });
+        });
+        
+        function switchWolf(wolfId) {
+            currentWolf = wolfId;
+            const wolf = WOLVES[wolfId];
+            
+            // Update UI
+            body.className = wolfId;
+            wolfTitle.textContent = wolf.title;
+            wolfSubtitle.textContent = wolf.subtitle;
+            footerText.textContent = wolf.footer;
+            
+            // Update active button
+            document.querySelectorAll('.personality-btn').forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.wolf === wolfId);
+            });
+            
+            // Clear conversation
+            conversationHistory = [];
+            chatMessages.innerHTML = '';
+            
+            // Add greeting
+            addSystemMessage(`Переключено на ${wolf.name}. Контекст разговора очищен.`);
+            
+            showToast(`Переключено на ${wolf.name}!`);
+        }
+        
+        // ═══════════════════════════════════════════════════════════════
+        // MESSAGE HANDLING
+        // ═══════════════════════════════════════════════════════════════
+        
+        function addMessage(content, role) {
+            const msg = document.createElement('div');
+            msg.className = `chat-message ${role}`;
+            msg.textContent = content;
+            chatMessages.appendChild(msg);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+        
+        function addSystemMessage(content) {
+            const msg = document.createElement('div');
+            msg.className = 'chat-message system';
+            msg.textContent = content;
+            chatMessages.appendChild(msg);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+        
+        function showTypingIndicator() {
+            typingIndicator.classList.add('active');
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+        
+        function hideTypingIndicator() {
+            typingIndicator.classList.remove('active');
+        }
+        
+        // ═══════════════════════════════════════════════════════════════
+        // API COMMUNICATION
+        // ═══════════════════════════════════════════════════════════════
+        
+        async function sendMessage() {
+            const userMessage = chatInput.value.trim();
+            if (!userMessage || isTyping) return;
+            
+            // Add user message
+            addMessage(userMessage, 'user');
+            conversationHistory.push({
+                role: 'user',
+                content: userMessage
+            });
+            
+            chatInput.value = '';
+            chatInput.style.height = 'auto';
+            isTyping = true;
+            sendBtn.disabled = true;
+            showTypingIndicator();
+            
+            try {
+                const wolf = WOLVES[currentWolf];
+                
+                // Prepare messages with system prompt
+                const messages = [
+                    {
+                        role: 'system',
+                        content: wolf.systemPrompt
+                    },
+                    ...conversationHistory
+                ];
+                
+                // API call
+                const response = await fetch(`${API_BASE_URL}/v1/chat/completions`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        model: MODEL_NAME,
+                        messages: messages,
+                        temperature: 0.8,
+                        max_tokens: 300,
+                        stream: false
+                    })
+                });
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                }
+                
+                const data = await response.json();
+                
+                // Extract assistant reply
+                const assistantMessage = data.choices[0].message.content.trim();
+                
+                hideTypingIndicator();
+                addMessage(assistantMessage, 'assistant');
+                
+                conversationHistory.push({
+                    role: 'assistant',
+                    content: assistantMessage
+                });
+                
+            } catch (error) {
+                hideTypingIndicator();
+                addSystemMessage(`❌ Ошибка: ${error.message}`);
+                console.error('API Error:', error);
+            } finally {
+                isTyping = false;
+                sendBtn.disabled = false;
+                chatInput.focus();
+            }
+        }
+        
+        // ═══════════════════════════════════════════════════════════════
+        // EVENT LISTENERS
+        // ═══════════════════════════════════════════════════════════════
+        
+        sendBtn.addEventListener('click', sendMessage);
+        
+        chatInput.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault();
+                sendMessage();
+            }
+        });
+        
+        // Auto-resize textarea
+        chatInput.addEventListener('input', () => {
+            chatInput.style.height = 'auto';
+            chatInput.style.height = Math.min(chatInput.scrollHeight, 150) + 'px';
+        });
+        
+        // Clear chat
+        clearBtn.addEventListener('click', () => {
+            conversationHistory = [];
+            chatMessages.innerHTML = '';
+            const wolf = WOLVES[currentWolf];
+            addSystemMessage(`Чат очищен. Теперь общаешься с ${wolf.name}.`);
+            showToast('Чат очищен!');
+        });
+        
+        // Export chat
+        exportBtn.addEventListener('click', () => {
+            if (conversationHistory.length === 0) {
+                showToast('Нечего экспортировать!');
+                return;
+            }
+            
+            const wolf = WOLVES[currentWolf];
+            let exportText = `=== Чат с ${wolf.name} ===\n`;
+            exportText += `Дата: ${new Date().toLocaleString('ru-RU')}\n\n`;
+            
+            conversationHistory.forEach(msg => {
+                const prefix = msg.role === 'user' ? 'Вы' : wolf.name;
+                exportText += `${prefix}: ${msg.content}\n\n`;
+            });
+            
+            const blob = new Blob([exportText], { type: 'text/plain;charset=utf-8' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `chat_${wolf.name}_${Date.now()}.txt`;
+            a.click();
+            URL.revokeObjectURL(url);
+            
+            showToast('Чат экспортирован!');
+        });
+        
+        // ═══════════════════════════════════════════════════════════════
+        // TOAST NOTIFICATIONS
+        // ═══════════════════════════════════════════════════════════════
+        
+        function showToast(message) {
+            toast.textContent = message;
+            toast.classList.add('show');
+            
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 2500);
+        }
+        
+        // ═══════════════════════════════════════════════════════════════
+        // INITIALIZATION
+        // ═══════════════════════════════════════════════════════════════
+        
+        addSystemMessage('Добро пожаловать! Выбери волка и начни общение.');
+        chatInput.focus();
+    </script>
+</body>
+</html>
