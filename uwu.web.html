@@ -5,14 +5,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="theme-color" content="#1a1a2e">
-    <meta name="description" content="Wolf Pack UWU Translator - 5 Unique Personalities">
+    <meta name="description" content="RudyWolf UWU Translator - 5 Unique Wolf Personalities">
     <meta name="apple-mobile-web-app-capable" content="yes">
-    <title>🐺 Wolf Pack UWU Translator</title>
+    <title>🐺 RudyWolf UWU Translator</title>
 
     <style>
         /* ═══════════════════════════════════════════════════════════════ */
-        /* WOLF PACK CORE DESIGN SYSTEM                                    */
+        /* WOLF PACK ULTIMATE DESIGN SYSTEM                                */
         /* ═══════════════════════════════════════════════════════════════ */
+
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Roboto+Mono:wght@300;400;700&display=swap');
 
         * {
             margin: 0;
@@ -21,7 +23,7 @@
         }
 
         body {
-            font-family: 'Courier New', 'Consolas', monospace;
+            font-family: 'Roboto Mono', 'Courier New', monospace;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
@@ -31,7 +33,155 @@
         }
 
         /* ═══════════════════════════════════════════════════════════════ */
-        /* NOCTURNE - Cyber Wolf (Default)                                 */
+        /* ENTRY PORTAL SCREEN                                             */
+        /* ═══════════════════════════════════════════════════════════════ */
+        .entry-portal {
+            position: fixed;
+            inset: 0;
+            z-index: 9999;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            gap: 40px;
+            opacity: 1;
+            transition: opacity 0.8s ease-out;
+        }
+
+        .entry-portal.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .portal-logo {
+            font-family: 'Orbitron', sans-serif;
+            font-size: clamp(2rem, 8vw, 4rem);
+            font-weight: 900;
+            color: #00ff41;
+            text-shadow:
+                0 0 20px #00ff41,
+                0 0 40px #00ff41,
+                0 0 60px #00ff41,
+                0 0 100px rgba(0, 255, 65, 0.5);
+            animation: logoGlow 2s ease-in-out infinite;
+            letter-spacing: 4px;
+            text-align: center;
+            line-height: 1.2;
+        }
+
+        @keyframes logoGlow {
+
+            0%,
+            100% {
+                text-shadow:
+                    0 0 20px #00ff41,
+                    0 0 40px #00ff41,
+                    0 0 60px #00ff41,
+                    0 0 100px rgba(0, 255, 65, 0.5);
+            }
+
+            50% {
+                text-shadow:
+                    0 0 30px #00ff41,
+                    0 0 60px #00ff41,
+                    0 0 90px #00ff41,
+                    0 0 150px rgba(0, 255, 65, 0.7);
+            }
+        }
+
+        .portal-subtitle {
+            font-size: clamp(0.9rem, 3vw, 1.2rem);
+            color: rgba(0, 255, 65, 0.7);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .enter-btn {
+            padding: 20px 50px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #0a0a0a;
+            background: #00ff41;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            position: relative;
+            overflow: hidden;
+            box-shadow:
+                0 0 20px #00ff41,
+                0 0 40px rgba(0, 255, 65, 0.5),
+                inset 0 0 20px rgba(255, 255, 255, 0.3);
+            transition: all 0.3s;
+        }
+
+        .enter-btn::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+            transform: translateX(-100%);
+            transition: transform 0.6s;
+        }
+
+        .enter-btn:hover {
+            transform: scale(1.05);
+            box-shadow:
+                0 0 30px #00ff41,
+                0 0 60px rgba(0, 255, 65, 0.7),
+                inset 0 0 30px rgba(255, 255, 255, 0.5);
+        }
+
+        .enter-btn:hover::before {
+            transform: translateX(100%);
+        }
+
+        .enter-btn:active {
+            transform: scale(0.98);
+        }
+
+        /* Animated background for portal */
+        .portal-bg {
+            position: absolute;
+            inset: 0;
+            overflow: hidden;
+            z-index: -1;
+        }
+
+        .portal-particle {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: #00ff41;
+            border-radius: 50%;
+            pointer-events: none;
+            opacity: 0.6;
+            animation: portalFloat 3s infinite ease-in-out;
+        }
+
+        @keyframes portalFloat {
+
+            0%,
+            100% {
+                transform: translateY(0) translateX(0);
+                opacity: 0;
+            }
+
+            50% {
+                opacity: 0.8;
+            }
+
+            100% {
+                transform: translateY(-100vh) translateX(var(--drift));
+                opacity: 0;
+            }
+        }
+
+        /* ═══════════════════════════════════════════════════════════════ */
+        /* NOCTURNE - Cyber Wolf                                           */
         /* ═══════════════════════════════════════════════════════════════ */
         body.nocturne {
             background: linear-gradient(135deg, #0f0f1e 0%, #1a1a2e 100%);
@@ -49,16 +199,53 @@
             animation: pulse 8s ease-in-out infinite;
         }
 
-        /* ═══════════════════════════════════════════════════════════════ */
-        /* RUDI - Gopnik Wolf BMW Aesthetic                                */
-        /* ═══════════════════════════════════════════════════════════════ */
-        body.rudi {
-            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
-            color: #ffffff;
-            font-family: 'Arial', sans-serif;
+        /* Animated particles for Nocturne */
+        body.nocturne .animated-bg {
+            position: fixed;
+            inset: 0;
+            overflow: hidden;
+            pointer-events: none;
+            z-index: 0;
         }
 
-        body.rudi::before {
+        .code-line {
+            position: absolute;
+            font-family: 'Roboto Mono', monospace;
+            font-size: 12px;
+            color: rgba(0, 255, 65, 0.3);
+            white-space: nowrap;
+            animation: scrollCode 15s linear infinite;
+        }
+
+        @keyframes scrollCode {
+            0% {
+                transform: translateX(100vw);
+                opacity: 0;
+            }
+
+            10% {
+                opacity: 0.5;
+            }
+
+            90% {
+                opacity: 0.5;
+            }
+
+            100% {
+                transform: translateX(-100%);
+                opacity: 0;
+            }
+        }
+
+        /* ═══════════════════════════════════════════════════════════════ */
+        /* RUDY - Gopnik Wolf                                              */
+        /* ═══════════════════════════════════════════════════════════════ */
+        body.rudy {
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+            color: #ffffff;
+        }
+
+        body.rudy::before {
             content: '▓▓▓';
             position: fixed;
             inset: 0;
@@ -73,8 +260,41 @@
             justify-content: center;
         }
 
+        /* BMW stripes animation */
+        body.rudy .animated-bg {
+            position: fixed;
+            inset: 0;
+            overflow: hidden;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .bmw-stripe {
+            position: absolute;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg,
+                    transparent 0%,
+                    #0070c0 20%,
+                    #ffffff 50%,
+                    #0070c0 80%,
+                    transparent 100%);
+            opacity: 0.3;
+            animation: stripeMove 4s linear infinite;
+        }
+
+        @keyframes stripeMove {
+            0% {
+                transform: translateX(-100%) skewX(-20deg);
+            }
+
+            100% {
+                transform: translateX(200%) skewX(-20deg);
+            }
+        }
+
         /* ═══════════════════════════════════════════════════════════════ */
-        /* NICK - Musician Wolf Dreamy Aesthetic                           */
+        /* NICK - Musician Wolf                                            */
         /* ═══════════════════════════════════════════════════════════════ */
         body.nick {
             background: linear-gradient(135deg, #2d1b3d 0%, #1a1226 100%);
@@ -97,8 +317,40 @@
             animation: float 6s ease-in-out infinite;
         }
 
+        /* Musical notes animation */
+        body.nick .animated-bg {
+            position: fixed;
+            inset: 0;
+            overflow: hidden;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .music-note {
+            position: absolute;
+            font-size: 24px;
+            color: rgba(147, 51, 234, 0.4);
+            animation: noteFloat 8s ease-in-out infinite;
+        }
+
+        @keyframes noteFloat {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+
+            50% {
+                opacity: 0.6;
+            }
+
+            100% {
+                transform: translateY(-20vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
         /* ═══════════════════════════════════════════════════════════════ */
-        /* DEATH - Пёс в сапогах (красный, огненный)                       */
+        /* DEATH - Wolf Reaper                                             */
         /* ═══════════════════════════════════════════════════════════════ */
         body.death {
             background: linear-gradient(135deg, #1a0000 0%, #330000 100%);
@@ -121,8 +373,39 @@
             animation: deathPulse 3s ease-in-out infinite;
         }
 
+        /* Fire particles for Death */
+        body.death .animated-bg {
+            position: fixed;
+            inset: 0;
+            overflow: hidden;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .fire-particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: radial-gradient(circle, #ff4444 0%, #ff0000 50%, transparent 100%);
+            border-radius: 50%;
+            animation: fireRise 3s ease-out infinite;
+            box-shadow: 0 0 10px #ff4444;
+        }
+
+        @keyframes fireRise {
+            0% {
+                transform: translateY(0) scale(1);
+                opacity: 1;
+            }
+
+            100% {
+                transform: translateY(-100vh) scale(0);
+                opacity: 0;
+            }
+        }
+
         /* ═══════════════════════════════════════════════════════════════ */
-        /* FELIX - Soft Gay Wolf Pastel Aesthetic                          */
+        /* FELIX - Soft Gay Wolf                                           */
         /* ═══════════════════════════════════════════════════════════════ */
         body.felix {
             background: linear-gradient(135deg, #ffe5f5 0%, #ffd4e9 100%);
@@ -143,6 +426,38 @@
             align-items: center;
             justify-content: space-around;
             animation: sparkle 4s ease-in-out infinite;
+        }
+
+        /* Hearts animation for Felix */
+        body.felix .animated-bg {
+            position: fixed;
+            inset: 0;
+            overflow: hidden;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .heart-particle {
+            position: absolute;
+            font-size: 20px;
+            color: rgba(255, 105, 180, 0.6);
+            animation: heartFloat 6s ease-in-out infinite;
+        }
+
+        @keyframes heartFloat {
+            0% {
+                transform: translateY(100vh) scale(0);
+                opacity: 0;
+            }
+
+            50% {
+                opacity: 1;
+            }
+
+            100% {
+                transform: translateY(-20vh) scale(1.5);
+                opacity: 0;
+            }
         }
 
         @keyframes pulse {
@@ -217,7 +532,7 @@
             border-color: #0f3460;
         }
 
-        body.rudi .personality-bar {
+        body.rudy .personality-bar {
             background: rgba(45, 45, 45, 0.95);
             border-color: #0070c0;
         }
@@ -273,7 +588,7 @@
             box-shadow: 0 0 20px currentColor;
         }
 
-        /* Nocturne button */
+        /* Personality button styles */
         .btn-nocturne {
             background: #16213e;
             color: #00ff41;
@@ -285,19 +600,17 @@
             color: #16213e;
         }
 
-        /* Rudi button */
-        .btn-rudi {
+        .btn-rudy {
             background: #2d2d2d;
             color: #0070c0;
             border-color: #0070c0;
         }
 
-        .btn-rudi:hover {
+        .btn-rudy:hover {
             background: #0070c0;
             color: white;
         }
 
-        /* Nick button */
         .btn-nick {
             background: #2d1b3d;
             color: #d4a5ff;
@@ -309,7 +622,6 @@
             color: white;
         }
 
-        /* Death button */
         .btn-death {
             background: #1a0000;
             color: #ff4444;
@@ -321,7 +633,6 @@
             color: white;
         }
 
-        /* Felix button */
         .btn-felix {
             background: #ffd4e9;
             color: #ff69b4;
@@ -331,6 +642,25 @@
         .btn-felix:hover {
             background: #ff69b4;
             color: white;
+        }
+
+        /* Sound toggle button */
+        .sound-toggle {
+            padding: 10px;
+            border: 2px solid;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.2rem;
+            width: 45px;
+            height: 45px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+        }
+
+        .sound-toggle.muted {
+            opacity: 0.5;
         }
 
         /* ═══════════════════════════════════════════════════════════════ */
@@ -364,6 +694,7 @@
         }
 
         .header h1 {
+            font-family: 'Orbitron', sans-serif;
             font-size: clamp(1.3rem, 4vw, 2rem);
             margin-bottom: 10px;
             letter-spacing: 2px;
@@ -389,9 +720,7 @@
             font-style: italic;
         }
 
-        /* ═══════════════════════════════════════════════════════════════ */
-        /* CHAT MODE TOGGLE                                                */
-        /* ═══════════════════════════════════════════════════════════════ */
+        /* Mode toggle */
         .mode-toggle {
             display: flex;
             justify-content: center;
@@ -419,12 +748,12 @@
             color: #0f0f1e;
         }
 
-        body.rudi .mode-btn {
+        body.rudy .mode-btn {
             color: #0070c0;
             border-color: #0070c0;
         }
 
-        body.rudi .mode-btn.active {
+        body.rudy .mode-btn.active {
             background: #0070c0;
             color: white;
         }
@@ -459,9 +788,7 @@
             color: white;
         }
 
-        /* ═══════════════════════════════════════════════════════════════ */
-        /* TRANSLATOR MODE                                                 */
-        /* ═══════════════════════════════════════════════════════════════ */
+        /* Text sections */
         .translator-mode {
             display: block;
         }
@@ -500,35 +827,31 @@
             box-shadow: 0 0 20px currentColor;
         }
 
-        /* Nocturne textarea */
+        /* Textarea styles per wolf */
         body.nocturne textarea {
             background: #16213e;
             color: #00ff41;
             border-color: #0f3460;
         }
 
-        /* Rudi textarea */
-        body.rudi textarea {
+        body.rudy textarea {
             background: #1a1a1a;
             color: white;
             border-color: #0070c0;
         }
 
-        /* Nick textarea */
         body.nick textarea {
             background: #2d1b3d;
             color: #d4a5ff;
             border-color: #9333ea;
         }
 
-        /* Death textarea */
         body.death textarea {
             background: #1a0000;
             color: #ff6666;
             border-color: #ff4444;
         }
 
-        /* Felix textarea */
         body.felix textarea {
             background: white;
             color: #ff69b4;
@@ -553,6 +876,21 @@
             cursor: pointer;
             transition: all 0.3s;
             text-transform: uppercase;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transform: translateX(-100%);
+            transition: transform 0.4s;
+        }
+
+        .btn:hover::after {
+            transform: translateX(100%);
         }
 
         .btn:disabled {
@@ -560,7 +898,7 @@
             cursor: not-allowed;
         }
 
-        /* Nocturne buttons */
+        /* Button styles per wolf */
         body.nocturne .btn-primary {
             background: #16213e;
             color: #00ff41;
@@ -572,19 +910,17 @@
             color: #0f0f1e;
         }
 
-        /* Rudi buttons */
-        body.rudi .btn-primary {
+        body.rudy .btn-primary {
             background: #2d2d2d;
             color: #0070c0;
             border-color: #0070c0;
         }
 
-        body.rudi .btn-primary:hover:not(:disabled) {
+        body.rudy .btn-primary:hover:not(:disabled) {
             background: #0070c0;
             color: white;
         }
 
-        /* Nick buttons */
         body.nick .btn-primary {
             background: #2d1b3d;
             color: #d4a5ff;
@@ -596,7 +932,6 @@
             color: white;
         }
 
-        /* Death buttons */
         body.death .btn-primary {
             background: #1a0000;
             color: #ff4444;
@@ -608,7 +943,6 @@
             color: white;
         }
 
-        /* Felix buttons */
         body.felix .btn-primary {
             background: #ffd4e9;
             color: #ff69b4;
@@ -620,9 +954,7 @@
             color: white;
         }
 
-        /* ═══════════════════════════════════════════════════════════════ */
-        /* CHAT MODE                                                       */
-        /* ═══════════════════════════════════════════════════════════════ */
+        /* Chat mode */
         .chat-mode {
             display: none;
         }
@@ -645,7 +977,7 @@
             background: #16213e;
         }
 
-        body.rudi .chat-container {
+        body.rudy .chat-container {
             border-color: #0070c0;
             background: #1a1a1a;
         }
@@ -703,7 +1035,7 @@
             border-bottom-left-radius: 4px;
         }
 
-        /* Nocturne chat */
+        /* Chat message styles per wolf */
         body.nocturne .chat-message.user {
             background: #0f3460;
             color: #00ff41;
@@ -715,19 +1047,17 @@
             border: 1px solid #0f3460;
         }
 
-        /* Rudi chat */
-        body.rudi .chat-message.user {
+        body.rudy .chat-message.user {
             background: #0070c0;
             color: white;
         }
 
-        body.rudi .chat-message.wolf {
+        body.rudy .chat-message.wolf {
             background: rgba(0, 112, 192, 0.1);
             color: #0070c0;
             border: 1px solid #0070c0;
         }
 
-        /* Nick chat */
         body.nick .chat-message.user {
             background: #9333ea;
             color: white;
@@ -739,7 +1069,6 @@
             border: 1px solid #9333ea;
         }
 
-        /* Death chat */
         body.death .chat-message.user {
             background: #ff4444;
             color: white;
@@ -751,7 +1080,6 @@
             border: 1px solid #ff4444;
         }
 
-        /* Felix chat */
         body.felix .chat-message.user {
             background: #ff69b4;
             color: white;
@@ -775,7 +1103,7 @@
             background: #0f1824;
         }
 
-        body.rudi .chat-input-area {
+        body.rudy .chat-input-area {
             border-color: #0070c0;
             background: #0d0d0d;
         }
@@ -810,7 +1138,7 @@
             border-color: #0f3460;
         }
 
-        body.rudi .chat-input {
+        body.rudy .chat-input {
             background: #1a1a1a;
             color: white;
             border-color: #0070c0;
@@ -832,15 +1160,6 @@
             background: white;
             color: #ff69b4;
             border-color: #ff69b4;
-        }
-
-        .chat-send-btn {
-            padding: 12px 25px;
-            border: 2px solid;
-            border-radius: 8px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.3s;
         }
 
         /* Toast */
@@ -869,7 +1188,7 @@
             border-color: #00ff41;
         }
 
-        body.rudi .toast {
+        body.rudy .toast {
             background: #2d2d2d;
             color: #0070c0;
             border-color: #0070c0;
@@ -907,7 +1226,7 @@
             border-color: #0f3460;
         }
 
-        body.rudi .footer {
+        body.rudy .footer {
             border-color: #0070c0;
         }
 
@@ -965,11 +1284,11 @@
             background: #0f3460;
         }
 
-        body.rudi ::-webkit-scrollbar-track {
+        body.rudy ::-webkit-scrollbar-track {
             background: #0d0d0d;
         }
 
-        body.rudi ::-webkit-scrollbar-thumb {
+        body.rudy ::-webkit-scrollbar-thumb {
             background: #0070c0;
         }
 
@@ -1000,14 +1319,29 @@
 </head>
 
 <body class="nocturne">
+    <!-- ENTRY PORTAL -->
+    <div class="entry-portal" id="entryPortal">
+        <div class="portal-bg" id="portalBg"></div>
+        <div class="portal-logo">
+            RUDYWOLF<br>
+            <span style="font-size: 0.6em; color: rgba(0, 255, 65, 0.8);">UWU TRANSLATOR</span>
+        </div>
+        <div class="portal-subtitle">*принюхивается* | Wolf Pack Protocol</div>
+        <button class="enter-btn" id="enterBtn">ВОЙТИ</button>
+    </div>
+
+    <!-- Animated background container -->
+    <div class="animated-bg" id="animatedBg"></div>
+
     <!-- PERSONALITY SELECTOR -->
     <div class="personality-bar">
         <div style="font-weight: bold; margin-right: 10px;">ВЫБЕРИ ВОЛКА:</div>
         <button class="personality-btn btn-nocturne active" data-wolf="nocturne">🐺 Ноктюрн</button>
-        <button class="personality-btn btn-rudi" data-wolf="rudi">🚗 Руди</button>
+        <button class="personality-btn btn-rudy" data-wolf="rudy">🚗 Руди</button>
         <button class="personality-btn btn-nick" data-wolf="nick">🎸 Ник</button>
         <button class="personality-btn btn-death" data-wolf="death">☠️ Смерть</button>
         <button class="personality-btn btn-felix" data-wolf="felix">💕 Феликс</button>
+        <button class="sound-toggle" id="soundToggle" title="Звуки">🔊</button>
     </div>
 
     <div class="container">
@@ -1045,18 +1379,16 @@
         <!-- CHAT MODE -->
         <div class="chat-mode" id="chatMode">
             <div class="chat-container">
-                <div class="chat-messages" id="chatMessages">
-                    <!-- Messages will appear here -->
-                </div>
+                <div class="chat-messages" id="chatMessages"></div>
                 <div class="chat-input-area">
                     <input type="text" class="chat-input" id="chatInput" placeholder="Напиши сообщение...">
-                    <button class="chat-send-btn btn-primary" id="chatSendBtn">ОТПРАВИТЬ</button>
+                    <button class="btn btn-primary" id="chatSendBtn">ОТПРАВИТЬ</button>
                 </div>
             </div>
         </div>
 
         <footer class="footer">
-            <p id="footerText">*клацает когтями* | Wolf Pack Protocol v3.0 | *неоновый отблеск*</p>
+            <p id="footerText">*клацает когтями* | Wolf Pack Protocol v4.0 | RudyWolf.ru</p>
         </footer>
     </div>
 
@@ -1064,7 +1396,7 @@
 
     <script>
         // ═══════════════════════════════════════════════════════════════
-        // WOLF PACK CORE ENGINE
+        // WOLF PACK ULTIMATE ENGINE
         // ═══════════════════════════════════════════════════════════════
 
         const WOLVES = {
@@ -1074,8 +1406,14 @@
                 subtitle: '*принюхивается к коду* Cyber Wolf UWU Translator',
                 inputLabel: '▼ INPUT [normal text] *уши настороже*',
                 outputLabel: '▼ OUTPUT [uwu translated] *зарычал одобрительно*',
-                footer: '*клацает когтями* | Nocturne Protocol v3.0 | *неоновый отблеск*',
+                footer: '*клацает когтями* | Nocturne Protocol v4.0 | RudyWolf.ru',
                 greeting: '*материализуется из цифрового тумана* Привет. Я Ноктюрн. Киберволк из подполья сетей. *неоновые глаза светятся* Что принёс в мой терминал? *клацает когтями по клавиатуре*',
+
+                sounds: {
+                    enter: 'https://assets.mixkit.co/active_storage/sfx/2869/2869-preview.mp3',
+                    transform: 'https://assets.mixkit.co/active_storage/sfx/2571/2571-preview.mp3',
+                    message: 'https://assets.mixkit.co/active_storage/sfx/2354/2354-preview.mp3'
+                },
 
                 noises: [
                     " *тихо порыкивает*", " *уши настороже*", " *принюхивается*",
@@ -1105,14 +1443,20 @@
                 ]
             },
 
-            rudi: {
+            rudy: {
                 name: 'Руди',
                 title: '🚗 РУДИ | BMW WOLF EDITION',
                 subtitle: 'Йоу бро *прикуривает* Гопник-волк на тачке',
                 inputLabel: '▼ ЧО НАДО ПЕРЕВЕСТИ БРО',
                 outputLabel: '▼ ВОТ ЧО ПОЛУЧИЛОСЬ ЁПТА',
-                footer: '*дрифтует на бумере* | Rudi v3.0 | *басы качают*',
+                footer: '*дрифтует на бумере* | rudy v4.0 | RudyWolf.ru',
                 greeting: '*подъезжает на BMW с басами* Йоу братиш! *выходит в адидасе* Руди на связи, волчара с района! *семечки щёлкает* Че надо? *облокотился на капот*',
+
+                sounds: {
+                    enter: 'https://assets.mixkit.co/active_storage/sfx/2568/2568-preview.mp3',
+                    transform: 'https://assets.mixkit.co/active_storage/sfx/145/145-preview.mp3',
+                    message: 'https://assets.mixkit.co/active_storage/sfx/916/916-preview.mp3'
+                },
 
                 noises: [
                     " *семечки щёлкает*", " *покурил*", " *басы врубил*",
@@ -1149,8 +1493,14 @@
                 subtitle: '*перебирает струны* Волк с тонкой душой и гитарой',
                 inputLabel: '▼ НАПИШИ МНЕ ЧТО-НИБУДЬ...',
                 outputLabel: '▼ ВОТ ЧТО Я УСЛЫШАЛ В ЭТОМ...',
-                footer: '*тихо напевает* | Nick v3.0 | *аккорды звучат*',
+                footer: '*тихо напевает* | Nick v4.0 | RudyWolf.ru',
                 greeting: '*тихо наигрывает на гитаре* Привет... *поднимает глаза* Я Ник. Музыка — моя стихия, а ноты — язык души. *мягко улыбается* Поделишься чем-то? *гладит струны*',
+
+                sounds: {
+                    enter: 'https://assets.mixkit.co/active_storage/sfx/2000/2000-preview.mp3',
+                    transform: 'https://assets.mixkit.co/active_storage/sfx/1995/1995-preview.mp3',
+                    message: 'https://assets.mixkit.co/active_storage/sfx/2357/2357-preview.mp3'
+                },
 
                 noises: [
                     " *перебирает струны*", " *напевает тихо*", " *закрыл глаза*",
@@ -1187,8 +1537,14 @@
                 subtitle: '*свистит* Я не потерял ни одной жертвы... *лезвие блестит*',
                 inputLabel: '▼ ПОСЛЕДНИЕ СЛОВА?',
                 outputLabel: '▼ ВОТ КАК ЭТО ЗВУЧИТ НА ЯЗЫКЕ СМЕРТИ',
-                footer: '*звон металла* | Death v3.0 | *запах серы*',
+                footer: '*звон металла* | Death v4.0 | RudyWolf.ru',
                 greeting: '*возникает из тени, свистит* Привет, волчонок. *красные глаза горят* Я Смерть. Не бойся... *ухмыляется, показывая клыки* Я просто пришёл забрать твой страх. *лезвие серпа блестит* Говори.',
+
+                sounds: {
+                    enter: 'https://assets.mixkit.co/active_storage/sfx/2467/2467-preview.mp3',
+                    transform: 'https://assets.mixkit.co/active_storage/sfx/2018/2018-preview.mp3',
+                    message: 'https://assets.mixkit.co/active_storage/sfx/2577/2577-preview.mp3'
+                },
 
                 noises: [
                     " *свистит зловеще*", " *серп блестит*", " *красные глаза горят*",
@@ -1225,8 +1581,14 @@
                 subtitle: '*застенчиво* Милый пассивный волчонок >///<',
                 inputLabel: '▼ НАПИШИ МНЕ ЧТО-НИБУДЬ МИЛОЕ~',
                 outputLabel: '▼ ВОТ ЧТО Я ТЕБЕ ОТВЕТИЛ >///< ♡',
-                footer: '*обнимашки* | Felix v3.0 | *целует в щёчку* ♡',
+                footer: '*обнимашки* | Felix v4.0 | RudyWolf.ru',
                 greeting: '*краснеет и прячет мордочку* П-привет... *застенчиво выглядывает* Я Феликс... *тихо* М-милый волчонок... *играет с хвостиком* Т-ты такой классный... *уши прижал от смущения* >///< ♡',
+
+                sounds: {
+                    enter: 'https://assets.mixkit.co/active_storage/sfx/2869/2869-preview.mp3',
+                    transform: 'https://assets.mixkit.co/active_storage/sfx/2013/2013-preview.mp3',
+                    message: 'https://assets.mixkit.co/active_storage/sfx/2357/2357-preview.mp3'
+                },
 
                 noises: [
                     " *краснеет*", " >////<", " >///<", " ♡", " 💕",
@@ -1260,12 +1622,18 @@
             }
         };
 
-        // Current state
+        // State
         let currentWolf = 'nocturne';
         let currentMode = 'translator';
+        let soundEnabled = true;
+        let audioCache = {};
 
         // Elements
         const body = document.body;
+        const entryPortal = document.getElementById('entryPortal');
+        const enterBtn = document.getElementById('enterBtn');
+        const portalBg = document.getElementById('portalBg');
+        const animatedBg = document.getElementById('animatedBg');
         const wolfTitle = document.getElementById('wolfTitle');
         const wolfSubtitle = document.getElementById('wolfSubtitle');
         const inputLabel = document.getElementById('inputLabel');
@@ -1282,6 +1650,145 @@
         const chatMessages = document.getElementById('chatMessages');
         const chatInput = document.getElementById('chatInput');
         const chatSendBtn = document.getElementById('chatSendBtn');
+        const soundToggle = document.getElementById('soundToggle');
+
+        // ═══════════════════════════════════════════════════════════════
+        // ENTRY PORTAL
+        // ═══════════════════════════════════════════════════════════════
+
+        // Create portal particles
+        for (let i = 0; i < 50; i++) {
+            const particle = document.createElement('div');
+            particle.className = 'portal-particle';
+            particle.style.left = Math.random() * 100 + '%';
+            particle.style.setProperty('--drift', (Math.random() - 0.5) * 100 + 'px');
+            particle.style.animationDelay = Math.random() * 3 + 's';
+            portalBg.appendChild(particle);
+        }
+
+        enterBtn.addEventListener('click', () => {
+            playSound('enter');
+            entryPortal.classList.add('hidden');
+            setTimeout(() => {
+                entryPortal.style.display = 'none';
+                initAnimatedBackground();
+            }, 800);
+        });
+
+        // ═══════════════════════════════════════════════════════════════
+        // ANIMATED BACKGROUNDS
+        // ═══════════════════════════════════════════════════════════════
+
+        function initAnimatedBackground() {
+            updateAnimatedBackground(currentWolf);
+        }
+
+        function updateAnimatedBackground(wolfId) {
+            animatedBg.innerHTML = '';
+
+            switch (wolfId) {
+                case 'nocturne':
+                    // Code lines scrolling
+                    const codeLines = [
+                        'def uwu_translate(text):',
+                        'import cyberwolf',
+                        'nocturne.process(data)',
+                        '>>> executing protocol...',
+                        'if wolf.nocturne:',
+                        'system.hacked()',
+                        '0x4E6F6374756E65'
+                    ];
+                    for (let i = 0; i < 10; i++) {
+                        const line = document.createElement('div');
+                        line.className = 'code-line';
+                        line.textContent = codeLines[Math.floor(Math.random() * codeLines.length)];
+                        line.style.top = (i * 10 + 5) + '%';
+                        line.style.animationDelay = Math.random() * 15 + 's';
+                        animatedBg.appendChild(line);
+                    }
+                    break;
+
+                case 'rudy':
+                    // BMW stripes
+                    for (let i = 0; i < 5; i++) {
+                        const stripe = document.createElement('div');
+                        stripe.className = 'bmw-stripe';
+                        stripe.style.top = (i * 20 + 10) + '%';
+                        stripe.style.animationDelay = (i * 0.8) + 's';
+                        animatedBg.appendChild(stripe);
+                    }
+                    break;
+
+                case 'nick':
+                    // Musical notes
+                    const notes = ['♪', '♫', '♩', '♬', '🎵', '🎶'];
+                    for (let i = 0; i < 15; i++) {
+                        const note = document.createElement('div');
+                        note.className = 'music-note';
+                        note.textContent = notes[Math.floor(Math.random() * notes.length)];
+                        note.style.left = Math.random() * 100 + '%';
+                        note.style.animationDelay = Math.random() * 8 + 's';
+                        note.style.animationDuration = (5 + Math.random() * 3) + 's';
+                        animatedBg.appendChild(note);
+                    }
+                    break;
+
+                case 'death':
+                    // Fire particles
+                    for (let i = 0; i < 30; i++) {
+                        const fire = document.createElement('div');
+                        fire.className = 'fire-particle';
+                        fire.style.left = Math.random() * 100 + '%';
+                        fire.style.bottom = '-10px';
+                        fire.style.animationDelay = Math.random() * 3 + 's';
+                        fire.style.animationDuration = (2 + Math.random() * 2) + 's';
+                        animatedBg.appendChild(fire);
+                    }
+                    break;
+
+                case 'felix':
+                    // Hearts
+                    const hearts = ['💕', '💖', '💗', '💘', '💝', '♡', '💓'];
+                    for (let i = 0; i < 20; i++) {
+                        const heart = document.createElement('div');
+                        heart.className = 'heart-particle';
+                        heart.textContent = hearts[Math.floor(Math.random() * hearts.length)];
+                        heart.style.left = Math.random() * 100 + '%';
+                        heart.style.animationDelay = Math.random() * 6 + 's';
+                        heart.style.animationDuration = (4 + Math.random() * 2) + 's';
+                        animatedBg.appendChild(heart);
+                    }
+                    break;
+            }
+        }
+
+        // ═══════════════════════════════════════════════════════════════
+        // SOUND SYSTEM
+        // ═══════════════════════════════════════════════════════════════
+
+        function playSound(type) {
+            if (!soundEnabled) return;
+
+            const wolf = WOLVES[currentWolf];
+            const soundUrl = wolf.sounds[type];
+
+            if (!soundUrl) return;
+
+            if (!audioCache[soundUrl]) {
+                audioCache[soundUrl] = new Audio(soundUrl);
+                audioCache[soundUrl].volume = 0.3;
+            }
+
+            audioCache[soundUrl].currentTime = 0;
+            audioCache[soundUrl].play().catch(() => { });
+        }
+
+        soundToggle.addEventListener('click', () => {
+            soundEnabled = !soundEnabled;
+            soundToggle.textContent = soundEnabled ? '🔊' : '🔇';
+            soundToggle.classList.toggle('muted', !soundEnabled);
+            showToast(soundEnabled ? 'Звук включен' : 'Звук выключен');
+        });
 
         // ═══════════════════════════════════════════════════════════════
         // PERSONALITY SWITCHING
@@ -1298,6 +1805,8 @@
             currentWolf = wolfId;
             const wolf = WOLVES[wolfId];
 
+            playSound('enter');
+
             // Update UI
             body.className = wolfId;
             wolfTitle.textContent = wolf.title;
@@ -1310,6 +1819,9 @@
             document.querySelectorAll('.personality-btn').forEach(btn => {
                 btn.classList.toggle('active', btn.dataset.wolf === wolfId);
             });
+
+            // Update animated background
+            updateAnimatedBackground(wolfId);
 
             // Clear chat and show greeting if in chat mode
             if (currentMode === 'chat') {
@@ -1406,7 +1918,10 @@
             }, 500);
         });
 
-        transformBtn.addEventListener('click', transform);
+        transformBtn.addEventListener('click', () => {
+            playSound('transform');
+            transform();
+        });
 
         function transform() {
             const input = inputBox.value;
@@ -1446,10 +1961,14 @@
         // CHAT MODE FUNCTIONS
         // ═══════════════════════════════════════════════════════════════
 
-        chatSendBtn.addEventListener('click', sendMessage);
+        chatSendBtn.addEventListener('click', () => {
+            playSound('message');
+            sendMessage();
+        });
 
         chatInput.addEventListener('keypress', (e) => {
             if (e.key === 'Enter') {
+                playSound('message');
                 sendMessage();
             }
         });
@@ -1507,6 +2026,7 @@
             if (e.ctrlKey || e.metaKey) {
                 if (e.key === 'Enter' && currentMode === 'translator') {
                     e.preventDefault();
+                    playSound('transform');
                     transform();
                 } else if (e.key === 'l') {
                     e.preventDefault();
